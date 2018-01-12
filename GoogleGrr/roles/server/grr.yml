@@ -1,0 +1,17 @@
+####################################################################
+# Install/Setup Google Grr
+####################################################################
+- name: Download Google Grr setup script
+  get_url:
+    url: https://raw.githubusercontent.com/google/grr/master/scripts/install_script_ubuntu.sh
+    dest: /tmp
+    mode: 0400
+
+- name: Run setup script
+  script: /tmp/install_script_ubuntu.sh
+
+- name: Start Google grr service
+  service:
+    name: grr
+    state: restarted
+    enabled: yes

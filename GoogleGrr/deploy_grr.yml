@@ -1,0 +1,9 @@
+- hosts: google_grr
+  become: yes
+  become_user: root
+  tasks:
+    - import_tasks: roles/server/init.yml
+    - import_tasks: roles/server/mysql.yml
+    - import_tasks: roles/server/grr.yml
+    - import_tasks: roles/server/nginx.yml
+    - import_tasks: roles/server/firewall.yml

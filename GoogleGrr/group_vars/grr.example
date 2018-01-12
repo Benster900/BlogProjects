@@ -1,0 +1,11 @@
+# MySQL setup
+mysql_root_user: root
+mysql_root_password:
+
+# MySQL Kolide
+mysql_grr_dbname: grr
+mysql_grr_user:
+mysql_grr_pass: 
+
+# Set to % for all hosts
+mysql_grr_hosts: 127.0.0.1
