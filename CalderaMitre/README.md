@@ -8,7 +8,10 @@
     1. cert info
 0. ansible-playbook -i hosts deploy_caldera.yml -u <user>
 
-## Docke setup - dev
+## Docker setup - dev
+0. docker build -t caldera .
+0. docker run -d -p 8888:8888 caldera
+
 
 ## Supported OSes for Ansible
 * Ubuntu Server 16.04 64-bit
