@@ -1,1 +1,2 @@
 [google_grr]
+172.16.77.130 ansible_python_interpreter=/usr/bin/python3 timeout=30

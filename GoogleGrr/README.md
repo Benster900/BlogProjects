@@ -11,8 +11,11 @@
     1. mysql_root_password
     1. mysql_grr_user
     1. mysql_grr_pass
+    1. grr_password
+    1. email settings(optional)
 0. ansible-playbook -i hosts deploy_grr.yml -u <username>
 
+# Ansible Google Grr agents
 
 ## Supported OSes
 * Ubuntu Server 16.04 64-bit

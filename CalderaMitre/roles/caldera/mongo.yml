@@ -16,5 +16,5 @@
 - name: Start Mongo service
   service:
     name: mongodb
-    state: started
+    state: restarted
     enabled: yes

@@ -54,7 +54,7 @@
   register: mysql_result
   failed_when: "'database exists' in mysql_result.stdout"
 
-- name: Create Kolide database user
+- name: Create Grr database user
   mysql_user:
     name: '{{ mysql_grr_user }}'
     password: '{{ mysql_grr_pass }}'

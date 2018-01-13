@@ -1,0 +1,11 @@
+[Unit]
+Description=MITRE Caldera service
+After=network.target
+
+[Service]
+User=caldera
+Restart=on-failure
+ExecStart=/usr/bin/python3 {{ caldera_dir }}/caldera/caldera.py
+
+[Install]
+WantedBy=multi-user.target

@@ -14,5 +14,9 @@
     port: 443
     proto: tcp
 - ufw:
+    rule: allow
+    port: 8000
+    proto: tcp
+- ufw:
     state: enabled
     policy: deny
