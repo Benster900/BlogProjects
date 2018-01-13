@@ -1,0 +1,36 @@
+####################################################
+# Install/Setup Caldera
+####################################################
+- name: Install software
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - python3-dev
+    - pip3
+
+- name: Download caldera
+  git:
+    repo: 'https://github.com/mitre/caldera.git'
+    dest: /opt/
+
+- name: Pip requirements.txt
+  pip:
+    requirements: /opt/caldera/caldera/requirements.txt
+     executable: pip3
+
+- name: Create directory for CraterMain.exe
+  file:
+    path: '{{ caldera_dir }}/dep/crater/crater'
+    state: directory
+    mode: 0755
+
+- name: Download CraterMain.exe for Win8 and up
+  get_url:
+    url: https://github.com/mitre/caldera-crater/releases/download/v0.1.0/CraterMainWin8up.exe
+    dest: '{{ caldera_dir }}/dep/crater/crater/CraterMain.exe'
+
+- name: Copy SystemD file
+  template:
+    src: conf/caldera/caldera.service
+    dest: /etc/system/systemd
