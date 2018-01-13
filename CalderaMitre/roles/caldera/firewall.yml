@@ -12,5 +12,9 @@
     rule: allow
     name: Nginx HTTPS
 - ufw:
+    rule: allow
+    proto: tcp
+    port: 8888
+- ufw:
     state: enabled
     policy: deny

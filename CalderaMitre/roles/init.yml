@@ -10,3 +10,9 @@
 ####################################################################
 - name: Set time to {{ timezone }}
   shell: timedatectl set-ntp on && timedatectl set-timezone {{ timezone }}
+
+####################################################################
+# Set hostname
+####################################################################
+- hostname:
+    name: {{ caldera_hostname }}.{{ base_domain }}

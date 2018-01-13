@@ -12,6 +12,15 @@
 0. docker build -t caldera .
 0. docker run -d -p 8888:8888 caldera
 
+## Deploy Caldera agents to Windows
+0. vim hosts and set [win_agents]
+0. mv group_vars/windows.example group_vars/windows
+0. vim group_vars/windows and set:
+    1. ansible_user: <Windows username>
+    1. ansible_password: <Windows user password>
+0. ansible-playbook -i hosts deploy_windows_agents.yml
+
+
 
 ## Supported OSes for Ansible
 * Ubuntu Server 16.04 64-bit

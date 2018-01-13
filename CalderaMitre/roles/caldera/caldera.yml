@@ -44,10 +44,10 @@
     dest: '{{ caldera_dir }}/dep/crater/crater/CraterMain.exe'
     validate_certs: no
 
-- name: Copy Caldera settings.yaml
-  template:
-    src: conf/caldera/settings.yaml.default
-    dest: '{{ caldera_dir }}/caldera/conf/settings.yaml.default'
+#- name: Copy Caldera settings.yaml
+#  template:
+#    src: conf/caldera/settings.yaml.default
+#    dest: '{{ caldera_dir }}/caldera/conf/settings.yaml.default'
 
 - name: Copy SystemD file
   template:
