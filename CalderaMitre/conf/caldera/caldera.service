@@ -5,7 +5,8 @@ After=network.target
 [Service]
 User=caldera
 Restart=on-failure
-ExecStart=/usr/bin/python3 {{ caldera_dir }}/caldera/caldera.py
+WorkingDirectory={{ caldera_dir }}/caldera
+ExecStart=/usr/bin/python3 caldera.py
 
 [Install]
 WantedBy=multi-user.target
