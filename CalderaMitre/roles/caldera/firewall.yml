@@ -7,10 +7,12 @@
     name: OpenSSH
 - ufw:
     rule: allow
-    name: Nginx HTTP
+    port: 80
+    proto: tcp
 - ufw:
     rule: allow
-    name: Nginx HTTPS
+    port: 443
+    proto: tcp
 - ufw:
     rule: allow
     proto: tcp
