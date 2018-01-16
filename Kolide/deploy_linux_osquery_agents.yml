@@ -1,0 +1,9 @@
+- hosts: linux_agents
+  become: yes
+  become_user: root
+  tasks:
+    - include_vars: group_vars/agents
+    - import_tasks: roles/agents/deploy_osquery_centos.yml
+      when: ansible_distribution == "CentOS"
+    - import_tasks: roles/agents/deploy_osquery_ubuntu.yml
+      when: ansible_distribution == "Ubuntu"
