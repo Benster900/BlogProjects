@@ -5,12 +5,13 @@
 0. vim group_vars/all and set:
     1. base_domain
     1. caldera_pass
-    1. cert info
+0. Create a DNS entry on your DNS server for {{ caldera_pass }}.{{ base_domain }}
 0. ansible-playbook -i hosts deploy_caldera.yml -u <user>
 
 ## Docker setup - dev
 0. docker build -t caldera .
-0. docker run -d -p 8888:8888 caldera
+0. docker run -d -p 8888:8888 --hostname=<FQDN> caldera
+    1. A DNS entry MUST be made to point at the host running the Docker container. By default Caldera uses the hostname of the Docker container which is only accessible within the Docker network.
 
 ## Deploy Caldera agents to Windows
 0. vim hosts and set [win_agents]
@@ -26,8 +27,6 @@
 * Ubuntu Server 16.04 64-bit
 
 # To do:
-* Dockerize
-* Windows agent deploy
 
 # Resources/Sources
 * https://caldera.readthedocs.io/en/latest/installation.html
