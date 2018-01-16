@@ -11,6 +11,7 @@ RUN git clone https://github.com/mitre/caldera.git /opt/caldera
 
 WORKDIR /opt/caldera/caldera
 RUN pip3 install --upgrade pip
+RUN sed -i 's#aiohttp==2.3.2#aiohttp==2.3.8#g' requirements.txt
 RUN pip3 install -r requirements.txt
 
 RUN mkdir -p ../dep/crater/crater

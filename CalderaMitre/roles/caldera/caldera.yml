@@ -25,6 +25,12 @@
     owner: caldera
     group: caldera
 
+- name: SED aiohttp==2.3.2 to aiohttp==2.3.8
+  lineinfile:
+    path: '{{ caldera_dir }}/caldera/requirements.txt'
+    regexp: '^aiohttp==2.3.2'
+    line: 'aiohttp==2.3.8'
+
 - name: Pip requirements.txt
   pip:
     requirements: '{{ caldera_dir }}/caldera/requirements.txt'
