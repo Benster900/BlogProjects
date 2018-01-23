@@ -11,10 +11,6 @@ services:
       - /srv/cowrie/dl:/cowrie/dl
       - /srv/cowrie/log:/cowrie/log
       - /srv/cowrie/custom:/custom
-      - /srv/cowrie/cowrie.cfg:/cowrie/cowrie.cfg
-    environment:
-      - GID=1000
-      - UID=1000
   cowrie-db:
     restart: always
     image: mariadb:10
