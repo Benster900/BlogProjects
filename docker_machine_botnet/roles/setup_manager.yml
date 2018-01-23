@@ -1,0 +1,27 @@
+####################################################################
+#  Install/Setup Docker
+####################################################################
+- name: Install chocolatey
+  win_shell: Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+- name: Install Docker
+  name: docker
+  state: latest
+
+- name: Setup Docker swarn
+  shell: docker swarm init --advertise-addr={{ ansible_host }} --listen-addr {{ ansible_host }}:2377
+  register: output
+
+- name: Print Docker token
+  debug:
+    msg: {{ output }}
+
+####################################################################
+# Slack notification
+####################################################################
+- name: Send slack notification when done
+  slack:
+    token: "{{ slack_token }}"
+    msg: '{{ ansible_nodename }}:{{ ansible_default_ipv4.address }} - Finished setting OSQuery agent on {{ ansible_nodename }}'
+    channel: "{{ slack_channel }}"
+  when: slack_token is defined
