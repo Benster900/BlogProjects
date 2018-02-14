@@ -23,7 +23,7 @@ $sb = {
   )
 
   if (( Test-Connection -Cn $computer -BufferSize 16 -Count 1 -ea 0 -TimeToLive 3 -quiet )) {
-    M:\PsExec -i "\\$computer" -u $username -p $password -d cmd /c $Command
+    M:\PsExec -i "\\$computer" -u $username -p $password "C:\Program Files\Internet Explorer\iexplore.exe" https://youtu.be/SjHUb7NSrNk?t=1
   }
 }
 
@@ -32,7 +32,7 @@ Iterate over each compunter in hosts file
 #>
 foreach ($computer in Get-Content hosts) {
   Write-Host "starting $computer" -foreground green
-  $jobs += Start-Job $sb -ArgumentList $computer, $username, $password
+  $jobs += Start-Job $sb -ArgumentList $computer
 }
 
 Wait-Job $jobs
