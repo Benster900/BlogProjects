@@ -1,0 +1,4 @@
+- hosts: win_agents
+  tasks:
+    - win_ping:
+    - import_tasks: roles/wazuh_agent/windows_agent.yml
