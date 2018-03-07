@@ -1,0 +1,2 @@
+[snort]
+10.150.100.105 ansible_python_interpreter=/usr/bin/python3
