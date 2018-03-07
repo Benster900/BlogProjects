@@ -1,0 +1,119 @@
+- name: Update all packages to the latest version
+  apt:
+    upgrade: dist
+
+#- name: Configure listening interface
+
+
+- name: Install software for Snort
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - build-essential
+    - libpcap-dev 
+    - libpcre3-dev 
+    - libdumbnet-dev
+    - bison
+    - flex
+    - zlib1g-dev 
+    - liblzma-dev 
+    - openssl 
+    - libssl-dev
+
+- name: Create directory
+  file:
+    path: /tmp/daq
+    state: directory
+
+- name: Download and untar Snort DAQ
+  unarchive:
+    src: '{{ snort_daq_url }}'
+    dest: /tmp/daq
+    extra_opts: [--strip-components=1]
+    remote_src: yes
+
+- name: Configure, make, and install
+  shell: ./configure && make && make install    
+  args:
+    chdir: /tmp/daq
+
+- name: Create directory
+  file:
+    path: /tmp/snort
+    state: directory
+
+- name: Download and unstart Snort
+  unarchive:
+    src: '{{ snort_package_url }}'
+    dest: /tmp/snort
+    extra_opts: [--strip-components=1]
+    remote_src: yes
+
+- name: Configure, make, make install
+  shell: ./configure --enable-sourcefire && make && make install
+  args:
+    chdir: /tmp/snort
+
+- name: Ldconfig
+  shell: ldconfig
+
+- name: Create Snort link
+  file:
+    src: /usr/local/bin/snort
+    dest: /usr/sbin/snort
+    state: link
+
+- name: Create Snort group  
+  group:
+    name: '{{ snort_group }}'
+    state: present
+
+- name: Create Snort user
+  user:
+    name: '{{ snort_user }}'
+    shell: /sbin/nologin
+    group: '{{ snort_group }}'
+    comment: "SNORT_IDS"
+
+- name: Create Snort directories in '/etc/snort'    
+  file:
+    path: /etc/snort/'{{ item }}'
+    state: directory
+    owner: snort
+    group: snort
+    mode: 5775
+  with_items:
+    - rules
+    - rules/iplists
+    - preproc_rules
+    - so_rules
+
+- name: Create Snort directory - dynamicrules
+  file:
+    path: '/usr/local/lib/snort_dynamicrules'
+    state: directory
+    owner: snort
+    group: snort
+    mode: 5775
+
+- name: Create Snort logging directory
+  file:
+    path: '/var/log/snort/archived_logs'
+    state: directory
+    owner: snort
+    group: snort
+    mode: 5775
+
+- name: Copy configuration files
+  shell: 'cp *.conf* /etc/snort'
+  args:
+    chdir: /tmp/snort/etc
+- shell: cp *.map /etc/snort
+  args:
+    chdir: /tmp/snort/etc
+- shell: cp *.dtd /etc/snort
+  args:
+    chdir: /tmp/snort/etc
+- shell: cp /tmp/snort/src/dynamic-preprocessors/build/usr/local/lib/snort_dynamicpreprocessor/* /usr/local/lib/snort_dynamicpreprocessor/
+
