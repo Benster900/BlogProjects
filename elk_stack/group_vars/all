@@ -1,0 +1,20 @@
+##################### Hostnames and Domains #####################
+base_domain: hackinglab.beer
+hostname: elk
+
+##################### Slack #####################
+slack_channel: 
+slack_token: 
+
+##################### Timezone #####################
+timezone: America/New_York
+
+##################### Cert generation #####################
+cert_country: US
+cert_state: NY
+cert_local: Rochester
+cert_org: Hackinglab.beer
+
+##################### Kibana #####################
+kibana_user: kibanaadmin
+kibana_pass: Password123*

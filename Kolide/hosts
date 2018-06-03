@@ -1,5 +1,5 @@
 [kolide]
-kolide01 ansible_ssh_host=172.16.77.130 ansible_python_interpreter=/usr/bin/python3 timeout=30
+kolide01 ansible_ssh_host=10.150.100.125 ansible_python_interpreter=/usr/bin/python3 timeout=30
 
 [graylog]
 graylog01 ansible_ssh_host=172.16.77.194 ansible_python_interpreter=/usr/bin/python3 timeout=30

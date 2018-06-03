@@ -1,5 +1,0 @@
-- hosts: snort
-  become: yes
-  become_user: root
-  tasks:
-    - import_tasks: roles/setup_snort.yml

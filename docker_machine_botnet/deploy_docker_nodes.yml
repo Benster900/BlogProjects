@@ -1,3 +1,0 @@
-- hosts: win_agents
-  tasks:
-    - roles/setup_nodes.yml

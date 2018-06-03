@@ -1,0 +1,13 @@
+[windows:children]
+win_laptop
+win_dc
+
+[win_laptop]
+10.1.1.40
+10.2.1.50
+10.3.1.60
+
+[win_dc]
+10.1.1.60
+10.2.1.60
+10.3.1.60
