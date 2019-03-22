@@ -1,5 +1,8 @@
 # Graylog v3
 
+## Blog post
+https://holdmybeersecurity.com/2019/03/22/install-setup-graylog-3-on-ubuntu-18-04
+
 ## Install/Setup Graylog
 1. `git clone https://github.com/CptOfEvilMinions/BlogProjects.git`
 1. `cd BlogProjects/Graylogv3`

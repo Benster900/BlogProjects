@@ -34,6 +34,7 @@
     owner: root
     group: root
     mode: 0400 
+    remote_src: True
 
 - name: Copy filebeat.yml
   template:
@@ -43,15 +44,23 @@
     group: root
     mode: 0400
 
-- name: Copy filebeat.yml bro
-  template:
-    src: 'conf/filebeat/bro-filebeat.yml'
-    dest: 'conf/filebeat/conf.d/bro-filebeat.yml'
+- name: Create Filebeat config directory
+  file:
+    path: '/etc/filebeat/conf.d'
+    state: directory
     owner: root
     group: root
     mode: 0400
 
-- name: Start Elasticsearch service
+- name: Copy filebeat.yml bro
+  template:
+    src: 'conf/filebeat/bro.yml'
+    dest: '/etc/filebeat/conf.d/bro.yml'
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Start Filebeat service
   service:
     name: 'filebeat'
     state: restarted
