@@ -1,0 +1,63 @@
+####################################################################
+# Install Rsyslog 
+####################################################################
+- name: Add ppa:adiscon/v8-stable 
+  apt_repository:
+    repo: ppa:adiscon/v8-stable 
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install Rsyslog
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - rsyslog
+    - rsyslog-mmjsonparse
+
+- name: Backup of Rsyslog.conf
+  copy:
+    src: '/etc/rsyslog.conf'
+    dest: '/etc/rsyslog.conf.bak'
+    owner: root
+    group: root
+    mode: 0400
+    remote_src: true
+
+- name: Copy Rsyslog.conf
+  template:
+    src: 'conf/rsyslog/rsyslog.conf'
+    dest: '/etc/rsyslog.conf'
+    owner: root
+    group: root
+    mode: 0400
+
+####################################################################
+# Setup Rsyslog 
+####################################################################
+- name: Copy 20-nginx.conf
+  template:
+    src: 'conf/rsyslog/30-nginx.conf'
+    dest: '/etc/rsyslog.d/30-nginx.conf'
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Start Rsyslog client
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: yes
+
+####################################################################
+#  Slack notification
+####################################################################
+- name: Send slack notification when done
+  slack:
+    token: "{{ slack_token }}"
+    msg: '{{ ansible_nodename }}:{{ ansible_default_ipv4.address }} - Finished setting up Rsyslog on {{ ansible_nodename }}'
+    channel: "{{ slack_channel }}"
+  when: slack_token != None

@@ -2,9 +2,9 @@
   become: yes
   become_user: root
   tasks:
-    - import_tasks: 'roles/init.yml'
-    - import_tasks: 'roles/setup_mongo.yml'
-    - import_tasks: 'roles/setup_elasticsearch.yml'
-    - import_tasks: 'roles/setup_graylog.yml'
-    - import_tasks: 'roles/setup_nginx.yml'
-    - import_tasks: 'roles/setup_ufw.yml'
+    - import_tasks: 'roles/graylog/init.yml'
+    - import_tasks: 'roles/graylog/setup_mongo.yml'
+    - import_tasks: 'roles/graylog/setup_elasticsearch.yml'
+    - import_tasks: 'roles/graylog/setup_graylog.yml'
+    - import_tasks: 'roles/graylog/setup_nginx.yml'
+    - import_tasks: 'roles/graylog/setup_ufw.yml'

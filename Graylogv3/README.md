@@ -6,7 +6,7 @@
 1. `vim hosts.ini` and set:
     1. `ansible_host` - Set to the IP addr for Graylog
 1. `mv group_vars/all.yml.example group_vars/all.yml`
-    1. `hostname` - Set hostname for the new graylog box
+    1. `graylog_hostname` - Set hostname for the new graylog box
     1. `base_domain` - Set the domain for graylog
     1. `timezone` - Set country/state for NTP(time)
     1. `cert stuff for OpenSSL cert` - cert_*

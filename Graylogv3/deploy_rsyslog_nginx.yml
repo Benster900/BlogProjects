@@ -1,0 +1,5 @@
+- hosts: 'rsyslog-agents'
+  become: yes
+  become_user: root
+  tasks:
+    - import_tasks: 'roles/rsyslog/setup_rsyslog.yml'

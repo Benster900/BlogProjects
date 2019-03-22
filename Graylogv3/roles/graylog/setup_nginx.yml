@@ -49,26 +49,26 @@
 - name: "generate ssl private key file"
   become: yes
   openssl_privatekey:
-    path: "/etc/nginx/ssl/{{ hostname }}.{{ base_domain }}.key"
+    path: "/etc/nginx/ssl/{{ graylog_hostname }}.{{ base_domain }}.key"
 
 - name: "generate ssl certificate request file"
   openssl_csr:
-    path: "/etc/nginx/ssl/{{ hostname }}.{{ base_domain }}.csr"
-    privatekey_path: "/etc/nginx/ssl/{{ hostname }}.{{ base_domain }}.key"
+    path: "/etc/nginx/ssl/{{ graylog_hostname }}.{{ base_domain }}.csr"
+    privatekey_path: "/etc/nginx/ssl/{{ graylog_hostname }}.{{ base_domain }}.key"
     subject_alt_name: "DNS:localhost"
     C: "{{ cert_country }}"
     ST: "{{ cert_state }}"
     L: "{{ cert_local }}"
     O: "{{ cert_org }}"
     OU: "{{ cert_ou }}"
-    CN: "{{ hostname }}.{{ base_domain }}"
+    CN: "{{ graylog_hostname }}.{{ base_domain }}"
 
 - name: "generate ssl certificate"
   become: yes
   openssl_certificate:
-    path: "/etc/nginx/ssl/{{ hostname }}.{{ base_domain }}.crt"
-    privatekey_path: "/etc/nginx/ssl/{{ hostname }}.{{ base_domain }}.key"
-    csr_path: "/etc/nginx/ssl/{{ hostname }}.{{ base_domain }}.csr"
+    path: "/etc/nginx/ssl/{{ graylog_hostname }}.{{ base_domain }}.crt"
+    privatekey_path: "/etc/nginx/ssl/{{ graylog_hostname }}.{{ base_domain }}.key"
+    csr_path: "/etc/nginx/ssl/{{ graylog_hostname }}.{{ base_domain }}.csr"
     provider: selfsigned
 
 - name: Restart nginx to activate letsencrypt site

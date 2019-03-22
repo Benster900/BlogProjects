@@ -1,5 +1,4 @@
 ################# General #################
-hostname: 'graylog'
 base_domain: ''
 timezone: 'America/New_York'
 
@@ -12,6 +11,7 @@ es_key: 'https://artifacts.elastic.co/GPG-KEY-elasticsearch'
 es_repo_url: 'deb https://artifacts.elastic.co/packages/oss-6.x/apt stable main'
 
 ################# Graylog #################
+graylog_hostname: 'graylog'
 graylog_repo_url: 'https://packages.graylog2.org/repo/packages/graylog-3.0-repository_latest.deb'
 graylog_admin_password: 'Password123!'
 

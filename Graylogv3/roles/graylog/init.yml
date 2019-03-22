@@ -22,15 +22,15 @@
 ####################################################################
 # Set hostname
 ####################################################################
-- name: change hostname to {{ hostname }}
+- name: change hostname to {{ graylog_hostname }}
   hostname:
-    name: "{{ hostname }}"
+    name: "{{ graylog_hostname }}"
 
 - name: add myself to /etc/hosts
   lineinfile:
     dest: /etc/hosts
     regexp: '^127\.0\.0\.1[ \t]+localhost'
-    line: '127.0.0.1 localhost {{ hostname }}'
+    line: '127.0.0.1 localhost {{ graylog_hostname }}'
     state: present
 
 ####################################################################
