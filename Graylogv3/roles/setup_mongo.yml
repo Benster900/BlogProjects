@@ -1,0 +1,37 @@
+################################################################
+# Install/Setup Mongo
+################################################################
+- name: Add MongoDB key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: '{{ mongo_key }}'
+
+- name: Add MongoDB Repo
+  apt_repository:
+    repo: '{{ mongo_repo_url }}'
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install MongoDB
+  apt:
+    name: 'mongodb-org'
+    state: latest
+
+- name: Start MongoDB service
+  service:
+    name: 'mongod'
+    state: restarted
+    enabled: yes
+
+####################################################################
+# Slack notification
+####################################################################
+- name: Send slack notification when done
+  slack:
+    token: "{{ slack_token }}"
+    msg: "{{ ansible_nodename }}:{{ ansible_default_ipv4.address }} - Set up Mongo - {{ ansible_nodename }}"
+    channel: "{{ slack_channel }}"
+  when: slack_token is undefined

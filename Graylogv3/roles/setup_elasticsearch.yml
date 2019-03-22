@@ -1,0 +1,49 @@
+################################################################
+# Install/Setup Elasticsearch
+################################################################
+- name: Add Elasticsearch key
+  apt_key:
+    url: '{{ es_key }}'
+    state: present
+
+- name: Add Elasticsearch Repo
+  apt_repository:
+    repo: '{{ es_repo_url }}'
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+
+- name: Install Elasticsearch
+  apt:
+    name: 'elasticsearch-oss'
+    state: latest
+
+- name: Replace cluster.name
+  lineinfile:
+    path: '/etc/elasticsearch/elasticsearch.yml'
+    regexp: '^#cluster.name:'
+    line: 'cluster.name: graylog'
+
+- name: Add ES option
+  lineinfile:
+    path: '/etc/elasticsearch/elasticsearch.yml'
+    line: "action.auto_create_index: false"
+    create: yes
+
+- name: Start Elasticsearch service
+  service:
+    name: 'elasticsearch'
+    state: restarted
+    enabled: yes
+
+####################################################################
+# Slack notification
+####################################################################
+- name: Send slack notification when done
+  slack:
+    token: "{{ slack_token }}"
+    msg: "{{ ansible_nodename }}:{{ ansible_default_ipv4.address }} - Set up Elasticsearch - {{ ansible_nodename }}"
+    channel: "{{ slack_channel }}"
+  when: slack_token is undefined
