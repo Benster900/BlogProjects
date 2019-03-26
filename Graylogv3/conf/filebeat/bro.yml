@@ -1,6 +1,6 @@
 - type: log
   paths:
-   - "{{ bro_log_dir }}/current/*.log"
+   - "{{ zeek_log_dir }}/current/*.log"
   document_type: json
   json.message_key: log
   json.keys_under_root: true
