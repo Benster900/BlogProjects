@@ -29,7 +29,7 @@
 - name: Add ES option
   lineinfile:
     path: '/etc/elasticsearch/elasticsearch.yml'
-    line: "action.auto_create_index: {{ es_action.auto_create_index }}"
+    line: "action.auto_create_index: {{ es_action_auto_create_index }}"
     create: yes
 
 - name: Start Elasticsearch service
