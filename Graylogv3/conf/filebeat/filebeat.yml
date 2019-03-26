@@ -56,10 +56,10 @@
 
 filebeat.config.modules:
   # Glob pattern for configuration loading
-  path: ${path.config}/modules.d/*.yml
+  #path: ${path.config}/modules.d/*.yml
 
   # Set to true to enable config reloading
-  reload.enabled: true
+  # reload.enabled: true
 
   # Period on which files under path should be checked for changes
   #reload.period: 10s
@@ -87,7 +87,7 @@ tags: ["bro"]
 #----------------------------- Logstash output --------------------------------
 output.logstash:
   # The Logstash hosts
-  hosts: ["graylog.hackinglab.local:5044"]
+  hosts: ["{{ graylog_hostname }}.{{ base_domain }}:{{ graylog_beats_port }}"]
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications

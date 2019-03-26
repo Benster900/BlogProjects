@@ -1,9 +1,9 @@
 ####################################################################
 # Install Rsyslog 
 ####################################################################
-- name: Add ppa:adiscon/v8-stable 
+- name: Add '{{ rsyslog_ppa }}'
   apt_repository:
-    repo: ppa:adiscon/v8-stable 
+    repo: '{{ rsyslog_ppa }}'
     state: present
 
 - name: Run the equivalent of "apt-get update" as a separate step
@@ -38,7 +38,7 @@
 ####################################################################
 # Setup Rsyslog 
 ####################################################################
-- name: Copy 20-nginx.conf
+- name: Copy 30-nginx.conf
   template:
     src: 'conf/rsyslog/30-nginx.conf'
     dest: '/etc/rsyslog.d/30-nginx.conf'
