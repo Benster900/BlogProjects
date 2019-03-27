@@ -1,7 +1,7 @@
 # Graylog v3
 
 ## Blog post
-[Install/Setup Graylog 3 on Ubuntu 18.04 - Zeeks logs + threat intel pipeline](https://holdmybeersecurity.com/2019/03/22/install-setup-graylog-3-on-ubuntu-18-04)
+[Install/Setup Graylog 3 on Ubuntu 18.04 - Zeeks logs + threat intel pipeline](https://holdmybeersecurity.com/2019/03/27/install-setup-graylog-3-on-ubuntu-18-04-zeeks-logs-threat-intel-pipeline/)
 
 ## Install/Setup Graylog
 1. `git clone https://github.com/CptOfEvilMinions/BlogProjects.git`
