@@ -28,6 +28,14 @@
     - 'conf/rsyslog_server/50-default.conf'
     - 'conf/rsyslog_server/60-osquery-to-disk.conf'
 
+
+- name: Create directory
+  file:
+    path: '/var/log/rsyslog'
+    state: directory
+    owner: syslog
+    group: adm
+
 - name: Start Rsyslog client
   service:
     name: rsyslog

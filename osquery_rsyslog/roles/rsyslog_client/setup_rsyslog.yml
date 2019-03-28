@@ -21,8 +21,8 @@
 
 - name: Copy Rsyslog.conf
   template:
-    src: conf/logging/rsyslog/rsyslog.conf
-    dest: /etc/rsyslog.conf
+    src: 'conf/rsyslog_client/rsyslog.conf'
+    dest: '/etc/rsyslog.conf'
     owner: root
     group: root
     mode: 0400
