@@ -30,13 +30,16 @@
 ####################################################################
 # Setup Rsyslog 
 ####################################################################
-- name: Copy Rsyslog configs
+- name: Copy rsyslog configs
   template:
-    src: 'conf/rsyslog_client/60-osquery.conf'
-    dest: /etc/rsyslog.d/60-osquery.conf
+    src: '{{ item }}'
+    dest: '/etc/rsyslog.d/{{ item | basename }}'
     owner: root
     group: root
     mode: 0400
+  with_items:
+    - 'conf/rsyslog_server/50-default.conf'
+    - 'conf/rsyslog_server/60-osquery.conf'
 
 - name: Start Rsyslog client
   service:
