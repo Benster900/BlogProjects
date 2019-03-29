@@ -2,6 +2,11 @@
 
 ![heart](.img/heart.png)
 
+## Blog post
+https://holdmybeersecurity.com/2019/03/29/logging-osquery-with-rsyslog-v8-love-at-first-sight/
+
+This blog post is going to cover how to ingest OSquery logs with Rsyslog v8. Most setups I have come across have Rsyslog ingesting the logs from disk but this setup will ingest logs via the system journal. OSquery supports writing logs to disk and to the system journal. This post also contains a setup via Ansible and a manual walkthrough. Lastly, explanations of Rsyslog and OSquery configs.
+
 ## Install/Setup Rsyslog server on Ubuntu 18.04
 1. `git clone https://github.com/CptOfEvilMinions/BlogProjects.git`
 1. `cd BlogProjects/osquery_rsyslog`
@@ -22,6 +27,7 @@
 ## Install/Setup Rsyslog + OSquery client on Ubuntu 18.04
 1. `vim hosts.ini` and set IP address under `rsyslog-client`
 1. `ansible-playbook -i hosts.ini deploy_rsyslog_osquery_client.yml -u <username> -K`
+
 
 ## Verify setup
 ### Rsyslog server
