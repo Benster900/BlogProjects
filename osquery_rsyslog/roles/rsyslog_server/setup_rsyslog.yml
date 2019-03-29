@@ -28,7 +28,6 @@
     - 'conf/rsyslog_server/50-default.conf'
     - 'conf/rsyslog_server/60-osquery-to-disk.conf'
 
-
 - name: Create directory
   file:
     path: '/var/log/rsyslog'
