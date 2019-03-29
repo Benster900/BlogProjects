@@ -39,7 +39,7 @@
     mode: 0400
   with_items:
     - 'conf/rsyslog_server/50-default.conf'
-    - 'conf/rsyslog_server/60-osquery.conf'
+    - 'conf/rsyslog_client/60-osquery.conf'
 
 - name: Start Rsyslog client
   service:

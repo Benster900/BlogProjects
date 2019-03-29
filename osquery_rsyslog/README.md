@@ -1,6 +1,10 @@
 # OSquery + Rsyslog
 
-## Install/Setup Rsyslog server
+![heart](.img/heart.png)
+
+## Install/Setup Rsyslog server on Ubuntu 18.04
+1. `git clone https://github.com/CptOfEvilMinions/BlogProjects.git`
+1. `cd BlogProjects/osquery_rsyslog`
 1. `vim hosts.ini` and set IP address under `rsyslog-server`
 1. `mv group_vars/all.yml.example group_vars/all.yml` and set:
     1. `slack_token` - OPTIONAL for Slack notifications
@@ -15,8 +19,28 @@
         1. If using RELP for ingesting/sending logs you can enable TLS with `rsyslog_tls`
 1. `ansible-playbook -i hosts.ini deploy_rsyslog_server.yml -u <username> -K`
 
-## Install/Setup Rsyslog + OSquery client
+## Install/Setup Rsyslog + OSquery client on Ubuntu 18.04
 1. `vim hosts.ini` and set IP address under `rsyslog-client`
 1. `ansible-playbook -i hosts.ini deploy_rsyslog_osquery_client.yml -u <username> -K`
+
+## Verify setup
+### Rsyslog server
+1. `systemctl status rsyslog` - Check if Rsyslog is running
+1. `rsyslogd -N 1` - Rsyslog syntax check on configs
+1. `netstat -tnlp` - Check if Rsyslog is listening
+1. `cd /var/log/rsyslog && ls` - Does this directory contain logs
+1. `cat /var/log/rsyslog/<ubuntu>/osquery/<year>/<month>/<date>/osquery.log` - OSquery log from remote host
+1. `tcpdump port 1514` - Check connection between server and client
+
+### Rsyslog + OSquery client
+1. `systemctl status rsyslog` - Check if Rsyslog is running
+1. `rsyslogd -N 1` - Rsyslog syntax check on configs
+1. `systemctl status osqueryd` - Check if OSquery is running
+1. `cat /var/log/osquery/osqueryd.results.log` - Check if OSquery is writing logs
+1. `tcpdump port 1514` - Check connection between server and client
+
+
+## Supported OSes 
+* Ubuntu Server 18.04 64-bit
 
 ## Resources/Sources
