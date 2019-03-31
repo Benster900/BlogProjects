@@ -1,0 +1,56 @@
+################################################################
+# Apt upgrade
+################################################################
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: yes
+    force_apt_get: True  
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+    force_apt_get: True  
+
+- name: Disable kernel updates
+  shell: 'apt-mark hold linux-image-generic linux-headers-generic'
+
+####################################################################
+#  Setup Timedatectl
+####################################################################
+- name: Set time to {{ timezone }}
+  timezone: 
+    name: '{{ timezone }}'
+
+####################################################################
+# Set hostname
+####################################################################
+- name: change hostname to {{ zeek_hostname }}
+  hostname:
+    name: "{{ zeek_hostname }}"
+
+- name: add myself to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^127\.0\.0\.1[ \t]+localhost'
+    line: '127.0.0.1 localhost {{ zeek_hostname }}'
+    state: present
+
+####################################################################
+# Install things
+####################################################################
+- name: Install things
+  apt:
+    name: ['apt-transport-https','openjdk-8-jre-headless','uuid-runtime','pwgen']
+    state: latest
+    force_apt_get: True  
+
+####################################################################
+#  Slack notification
+####################################################################
+- name: Send slack notification when done
+  slack:
+    token: "{{ slack_token }}"
+    msg: '{{ ansible_nodename }}:{{ ansible_default_ipv4.address }} - Init setup - {{ ansible_nodename }}'
+    channel: "{{ slack_channel }}"
+  when: slack_token is undefined
