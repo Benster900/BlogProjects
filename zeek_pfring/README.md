@@ -1,7 +1,9 @@
 # Zeek + PF_RING
 
-## Blog post
+Monitoring your home network can be challenging without enterprise-grade equipment. Although monitoring your home network can prove to be difficult, Proxmox and Zeek provide the perfect solution to monitor your home network. This blog post will cover how to setup Zeek+PF_Ring to monitor network traffic on Proxmox.
 
+## Blog post
+[Part 1: Install/Setup Zeek + pf_ring on Ubuntu 18.04 on Proxmox 5.3 + openVswitch](https://holdmybeersecurity.com/2019/04/03/part-1-install-setup-zeek-pf_ring-on-ubuntu-18-04-on-proxmox-5-3-openvswitch/)
 
 ## Install/Setup Zeek + PF_RING on Ubuntu 18.04
 1. `mv group_vars/all.yml.example group_vars/all.yml`
