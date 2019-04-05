@@ -1,0 +1,27 @@
+version: 2.2
+services:
+  zeek-manager:
+    container_name: zeek-manager
+    build:
+      context:
+      dockerfile: Dockerfile-zeek-stack-manager
+    volume:
+      - zeek-logs:/opt/bro/logs
+  zeek-proxy:
+    container_name: zeek-proxy
+    build:
+      context:
+      dockerfile: Dockerfile-zeek-stack-proxy
+    container_name: zeek-standalone
+  zeek-worker:
+    container_name: zeek-worker
+    build:
+      context:
+      dockerfile: Dockerfile-zeek-stack-worker
+    network:
+      - host
+    cap-add:
+      - NET_ADMIN
+
+volumes:
+  zeek-logs:

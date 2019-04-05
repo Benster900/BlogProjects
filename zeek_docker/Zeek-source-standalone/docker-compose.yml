@@ -1,0 +1,14 @@
+version: 2.2
+services:
+  zeek:
+    build: .
+    container_name: zeek-standalone
+    network:
+      - host
+    cap-add:
+      - NET_ADMIN
+    volume:
+      - zeek-logs:/opt/bro/logs
+      
+volumes:
+  zeek-logs:

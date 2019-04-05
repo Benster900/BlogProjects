@@ -1,0 +1,13 @@
+FROM ubuntu:18.04 as zeek-manager
+
+# Copy Zeek from build
+COPY --from=zeek-build /opt/bro /opt/bro
+
+COPY conf/bro/node-stack.cfg /opt/bro/etc/node.cfg
+
+# Entrypoint
+COPY conf/simple-entrypoint.sh /simple-entrypoint.sh
+RUN chmod +x /simple-entrypoint.sh 
+ENTRYPOINT [ "/simple-entrypoint.sh" ]
+
+CMD ["/opt/bro/bin/broctl","start"]
