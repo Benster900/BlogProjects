@@ -8,10 +8,12 @@
 1. Run on host: `ip a`
     1. Copy interface name you want to monitor
 
-### Build container
-1. `docker build  --build-arg zeek_interface=<interface to monitor on host> -t zeek-source-standalone .`
+## Build container
+1. `cd BlogProjects/zeek_docker`
+1. `docker build -f Zeek-source-standalone/Dockerfile --build-arg zeek_interface=<interface to monitor on host> -t zeek-source-standalone .`
 
-### Run container
+## Spin up container
+1. `cd Zeek-mirror`
 1. `docker-compose up -d`
 
 ## Debugging

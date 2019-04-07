@@ -5,7 +5,8 @@
     1. Copy interface name you want to monitor
 
 ## Build container
-1. `docker build --build-arg zeek_interface=<interface to monitor on host> -t zeek-mirror-standalone .`
+1. `cd BlogProjects/zeek_docker`
+1. `docker build -f Zeek-mirror/Dockerfile --build-arg zeek_interface=<interface to monitor on host> -t zeek-mirror-standalone .`
 
 ## Spin up container
 1. `docker-compose up -d`

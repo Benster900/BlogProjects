@@ -17,13 +17,13 @@ RUN sh -c "echo 'deb http://http://download.opensuse.org/repositories/network:/b
 RUN apt-get update -y && apt-get install bro -y
 
 # Add configs
-COPY node-standalone.cfg /opt/bro/etc/node.cfg
+COPY conf/bro/node-standalone.cfg /opt/bro/etc/node.cfg
 
 # Change default interface
 RUN sed -i "s/interface=eth0/interface=$zeek_interface/g" /opt/bro/etc/node.cfg
 
 # Supervisor
-COPY supervisor.conf /etc/supervisor/conf.d/supervisord.conf
+COPY conf/supervisor/supervisor.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Entrypoint
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
