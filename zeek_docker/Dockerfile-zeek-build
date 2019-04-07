@@ -13,3 +13,6 @@ RUN cd /tmp/zeek && \
     ./configure --prefix=/opt/bro/ && \
     make && \
     make install 
+
+# Delete Zeek download
+RUN rm -rf /tmp/zeek

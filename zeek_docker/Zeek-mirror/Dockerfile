@@ -1,10 +1,10 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 # Build args
 ARG zeek_interface=eth0
 
 # Update
-RUN apt-get update -y && apt-get install wget net-tools supervisor -y
+RUN apt-get update -y && apt-get install wget net-tools supervisor gnupg -y
 
 # Get Zeek GPG key
 RUN wget -nv http://download.opensuse.org/repositories/network:bro/xUbuntu_14.04/Release.key -O Release.key
@@ -13,7 +13,7 @@ RUN apt-get update
 RUN apt-key add - < Release.key
 
 # Install Zeek
-RUN sh -c "echo 'deb http://download.opensuse.org/repositories/network:/bro/xUbuntu_16.04/ /' > /etc/apt/sources.list.d/bro.list"
+RUN sh -c "echo 'deb http://http://download.opensuse.org/repositories/network:/bro/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/bro.list"
 RUN apt-get update -y && apt-get install bro -y
 
 # Add configs

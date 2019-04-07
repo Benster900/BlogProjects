@@ -1,5 +1,3 @@
-FROM ubuntu:18.04
-
 # Install pf_ring
 RUN apt-get update && \
     apt-get -y -q install wget lsb-release && \
@@ -7,6 +5,3 @@ RUN apt-get update && \
     apt-get clean all && \
     apt-get update && \
     apt-get -y install pfring
-
-COPY conf/simple-entrypoint.sh /tmp/simple-entrypoint.sh
-ENTRYPOINT ["/tmp/simple-entrypoint.sh"]

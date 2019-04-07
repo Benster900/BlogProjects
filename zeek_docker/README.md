@@ -3,7 +3,7 @@
 ## Warning
 THIS DOES NOT WORK ON MacOS!!!!!
 
-## Different flavors
+## Different setup flavors
 This repo contains different flavors of setups for Zeek. This repo contains three flavors which are: Zeek installed from a mirror, Zeek installed from source, and Zeek installed from source with PF_RING. 
 
 ### Zeek installed from a mirror
@@ -12,7 +12,7 @@ This option uses Ubuntu 16.04 and installs Zeek from the OpenSuse repositories. 
 ### Zeek installed from source
 This option uses Ubuntu 18.04 and compiles Zeek from source. This option takes longer to get Zeek up and running but is the most up-to-date option. It is recommended to compile Zeek from source which allows for additional functionality such as GeoIP tagging.
 
-### Standalone vs. stack
+### Standalone vs. cluster
 Zeek is NOT multithreaded, so once the limitations of a single processor core are reached the only option currently is to spread the workload across many cores, or even many physical computers. Zeek can run as single process that collects traffic and analyzes or is distributed(stack).
 
 The distributed mode allows the Zeek process to be split up into three main components: manager, proxy, and worker. The worker collects all traffic from interface and runs it through the Zeek engine. The proxy helps maintain state and variables across multiple platforms. The manager controls all of this and collects all the logs from the workers and proxy. 
@@ -22,6 +22,7 @@ Depending on the size of your network you may wish to stay with the simple stand
 
 ## Build Zeek
 1. `docker build -f Dockerfile-zeek-build -t zeek-build .`
+    1. This will create a 4GB image
 
 
 ## Supported OSes

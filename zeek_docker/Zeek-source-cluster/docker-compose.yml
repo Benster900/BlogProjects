@@ -2,6 +2,7 @@ version: 2.2
 services:
   zeek-manager:
     container_name: zeek-manager
+    restart: unless-stopped
     build:
       context:
       dockerfile: Dockerfile-zeek-stack-manager
@@ -9,12 +10,14 @@ services:
       - zeek-logs:/opt/bro/logs
   zeek-proxy:
     container_name: zeek-proxy
+    restart: unless-stopped
     build:
       context:
       dockerfile: Dockerfile-zeek-stack-proxy
     container_name: zeek-standalone
   zeek-worker:
     container_name: zeek-worker
+    restart: unless-stopped
     build:
       context:
       dockerfile: Dockerfile-zeek-stack-worker

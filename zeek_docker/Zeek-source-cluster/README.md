@@ -1,5 +1,7 @@
 # Zeek from source stack setup
 
+## Generate SSH keys
+1. `ssh-keygen -f .ssh/id_rsa -t rsa -N ''`
 
 ### Run Zeek stack
 1. Run on host: `ip a`

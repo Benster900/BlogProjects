@@ -1,0 +1,12 @@
+FROM ubuntu:18.04 as zeek-manager
+
+# Copy Zeek from build
+COPY --from=zeek-build /opt/bro /opt/bro
+
+## Copy SSH keys
+COPY .ssh/id_rsa.pub /tmp/id_rsa.pub
+RUN cat /tmp/id_rsa.pub >> /root/.ssh/authorized_keys
+
+
+COPY conf/simple-entrypoint.sh /tmp/simple-entrypoint.sh
+ENTRYPOINT ["/tmp/simple-entrypoint.sh"]
