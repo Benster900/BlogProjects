@@ -1,5 +1,8 @@
 FROM ubuntu:18.04 as zeek-manager
 
+# Install things
+RUN apt-get update -y && apt-get install net-tools iputils-ping -y
+
 # Copy Zeek from build
 COPY --from=zeek-build /opt/bro /opt/bro
 
@@ -10,9 +13,12 @@ COPY node-cluster.cfg /opt/bro/etc/node.cfg
 COPY .ssh/id_rsa /root/.ssh/id_rsa
 COPY .ssh/id_rsa.pub /root/.ssh/id_rsa.pub
 
+## Copy Zeek config
+COPY node-cluster.cfg /opt/bro/etc/node.cfg
+
 ## Supervisor
-RUN apt-get update -y && apt-get install python3 supervisor
-COPY supervisor.conf /etc/supervisor/conf.d/supervisord.conf
+RUN apt-get install python3 supervisor -y
+COPY supervisor-master.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Entrypoint
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/conf.d/supervisord.conf"]
