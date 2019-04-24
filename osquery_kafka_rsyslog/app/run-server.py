@@ -4,7 +4,6 @@ import json
 import requests
 import yaml
 
-
 def slack_alert(cfg, file_sha256_hash, hostname, file_path, report):
     slack_url = cfg['slack']['webhook_url']
 

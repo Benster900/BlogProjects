@@ -1,5 +1,9 @@
 # Osquery + Kafka + Rsyslog
 
+## Blog post
+
+* [Detecting malicious downloads with Osquery, Rsyslog, Kafka, Python3, and VirusTotal]()
+
 ## Spin up logging stack
 1. `docker-compose build`
 1. `docker-compose up -d`
