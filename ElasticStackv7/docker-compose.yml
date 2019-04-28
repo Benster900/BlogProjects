@@ -1,0 +1,70 @@
+version: '2.2'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile-nginx
+    container_name: elastic-nginx
+    restart: unless-stopped
+    networks: 
+      - default
+      - elastic-backend
+    ports:
+      - 80:80
+      - 443:443
+    depends_on:
+      - kibana
+    cpus: 1
+    mem_limit: 50M
+
+  kibana:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile-kibana
+    container_name: elastic-kibana
+    restart: unless-stopped
+    networks: 
+      - elastic-backend
+    depends_on:
+      - elasticsearch
+    cpus: 2 
+    mem_limit: 300M
+
+  logstash:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile-logstash
+    container_name: elastic-logstash
+    restart: unless-stopped
+    networks: 
+      - default
+      - elastic-backend
+    ports:
+      - 5044
+    depends_on:
+      - elasticsearch
+    cpus: 2
+    mem_limit: 1G
+
+  elasticsearch:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile-elasticsearch
+    container_name: elastic-elasticsearch
+    restart: unless-stopped
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks: 
+      - elastic-backend
+    cpus: 2
+    mem_limit: 2G
+
+networks: 
+  elastic-backend:
+    driver: overlay
+
+volumes:
+  esdata:
+    driver: local
