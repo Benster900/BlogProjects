@@ -31,9 +31,6 @@
 1. `docker-compose -f docker-compose-osquery-test.yml -p osquery-scale-test up --scale osquery-client=50`
 
 ## Docker Swarm
-### Spin up prometheus stack
-1. `docker stack deploy --compose-file docker-compose-prometheus-stack.yml prometheus`
-
 ### Spin up Kolide stack
 1. `docker build -f Dockerfile-kolide -t kolide .`
 1. `docker stack deploy --compose-file docker-compose-stack.yml kolide`
