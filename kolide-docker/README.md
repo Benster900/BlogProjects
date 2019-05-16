@@ -6,12 +6,12 @@
 ## Generate auth_jwt_key for Kolide
 1. `openssl rand -base64 32`
     1. Copy key
-1. `sed -i 's#<secret key>#changeme#g' conf/kolide/kolide.yml`
+1. `sed -i 's#changeme#<secret key>#g' conf/kolide/kolide.yml`
 
-## Spin up stack
-1. `docker-compose up -d`
+## Spin up Kolide stack
+1. `docker build -f Dockerfile-kolide -t kolide .`
+1. `docker stack deploy --compose-file docker-compose-stack.yml kolide`
 
-## Local Docker
 ### Setup Kolide
 1. Open a web browser
 1. Browse to `https://<docker IP>`
@@ -26,16 +26,7 @@
 1. Set Kolide URL
     1. Enter FQDN for Kolide
 
-### Osquery scale test
-1. `docker-compose -f docker-compose-osquery-test.yml build --build-arg osquery_enroll_secret="<Kolide auth key>"`
-1. `docker-compose -f docker-compose-osquery-test.yml -p osquery-scale-test up --scale osquery-client=50`
-
-## Docker Swarm
-### Spin up Kolide stack
-1. `docker build -f Dockerfile-kolide -t kolide .`
-1. `docker stack deploy --compose-file docker-compose-stack.yml kolide`
-
-### Osquery scale test
+## Osquery scale test
 1. `docker build --build-arg osquery_enroll_secret="<Kolide auth key>" -f Dockerfile-osquery -t osquery-client .`
 1. `docker stack deploy --compose-file docker-compose-osquery-test-stack.yml osquery-scale-test`
 1. `docker service scale osquery-scale-test_osquery-client=100` 
