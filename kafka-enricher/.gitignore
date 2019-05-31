@@ -2,3 +2,5 @@ config/config.py
 data/*
 __pycache__/
 venv/
+.vscode
+Docker/nginx/certs/*

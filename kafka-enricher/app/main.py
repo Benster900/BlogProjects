@@ -2,6 +2,7 @@ from app import app_config, kafka_consumer, kafka_producer
 import requests
 import os
 import json
+import datetime
 
 def get_abuse_blacklist():
     abuse_blacklist = set()
@@ -23,17 +24,17 @@ def get_abuse_blacklist():
 
 def is_ipaddr_malicious(message, abuse_blacklist):
     # Check if log contains an IP address
-    if 'id.orig_h' in message:
-        print (type(message))
-        ip_addr = message['id.orig_h']
+    if 'id.resp_h' in message:
+        ip_addr = message['id.resp_h']
 
         # If IP address is in blacklist add a key:value
         if ip_addr in abuse_blacklist:
+            print ( "[*] - {0} - Message before enrichment: {1}".format(datetime.datetime.now(), message) )
             message['threat_intel_abuse_ipaddr'] = True
+            print ( "[+] - {0} - Message AFTER enrichment: {1}".format(datetime.datetime.now(), message) )
         else: 
             message['threat_intel_abuse_ipaddr'] = False
 
-    print (message)
     return message
 
 
@@ -41,9 +42,7 @@ def delivery_report(err, msg):
     """ Called once for each message produced to indicate delivery result.
         Triggered by poll() or flush(). """
     if err is not None:
-        print('Message delivery failed: {}'.format(err))
-    else:
-        print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
+        print('[-] - {0} - Message delivery failed: {1}'.format(datetime.datetime.now(), err))
 
 def push_new_message(message):
     # Trigger any available delivery report callbacks from previous produce() calls
@@ -51,7 +50,6 @@ def push_new_message(message):
 
     #kafka_producer.produce(app_config.kafka_zeek_enrich_topic, message.encode('utf-8'), callback=delivery_report)
     kafka_producer.produce(app_config.kafka_zeek_enrich_topic, json.dumps(message), callback=delivery_report)
-
 
 
 def main():
@@ -65,17 +63,15 @@ def main():
         msg = kafka_consumer.poll( app_config.kafka_interval_pull )
 
         if msg is None:
-            print ('Message is None')
             continue
         if msg.error():
-            print("Consumer error: {}".format( msg.error() ))
+            print( "[-] - {0} - Consumer error: {1}".format( datetime.datetime.now(), msg.error() ))
             continue
-
-        print('Received message: {}'.format( msg.value() ))
 
         # Extract string and convert to JSON
         message = json.loads( msg.value().decode('utf-8') )
         
+        # Determine if IP addr is malicious
         message = is_ipaddr_malicious(message, abuse_blacklist)
 
         # Push log to topic
@@ -84,7 +80,6 @@ def main():
         # Wait for any outstanding messages to be delivered and delivery report
         # callbacks to be triggered.
         kafka_producer.flush()
-
 
     # Close connection to Kafka
     kafka_consumer.close()

@@ -1,6 +1,7 @@
 from config.config import DockerKafkaConfig, RemoteKafkaConfig
 from confluent_kafka import Consumer, Producer
 import os
+import datetime
 
 def is_docker():
     path = '/proc/self/cgroup'
@@ -23,7 +24,7 @@ else:
 kafka_producer = Producer({'bootstrap.servers': '{0}:{1}'.format(app_config.kafka_hostname, app_config.kafka_port) })
                 
 # Create Kafka consumer connector
-print ('Kafka broker: {0}:{1}'.format( app_config.kafka_hostname, app_config.kafka_port ))
+print ('[*] - {0} - Kafka broker: {1}:{2}'.format( datetime.datetime.now(), app_config.kafka_hostname, app_config.kafka_port ))
 kafka_consumer = Consumer({
     'bootstrap.servers': '{0}:{1}'.format( app_config.kafka_hostname, app_config.kafka_port ),
     'group.id': 'mygroup',
