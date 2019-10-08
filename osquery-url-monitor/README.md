@@ -1,19 +1,17 @@
-# osquery url monitor
+# PoC: Monitoring user browser activity with Osquery
+
+*  Blog post: [PoC: Monitoring user browser activity with Osquery](https://holdmybeersecurity.com/2019/10/06/poc-monitoring-user-browser-activity-with-osquery/)
+
+This proof-of-concept (PoC) will demonstrate how to use Osquery to monitor the browser activity of users.  Not only will this PoC collect browser activity, but it will also use VirusTotal to rank each URL to detect malicious activity. In addition to VirusTotal, this PoC will utilize Rsyslog, Osquery, Kafka, Splunk,  Virustotal, Python3, and Docker as a logging pipeline. Once this pipeline has been implemented your security team will have the ability to protect your user's from today's most serious threats on the web.
 
 ## Local dev
 1. `virtualenv -p python3 venv`
 1. `source venv/bin/activate`
+1. `pip3 install -r app/requirements.txt`
 
-## Generate certs for Nginx
-1. `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout conf/nginx/ssl/nginx.key -out conf/nginx/ssl/nginx.crt`
+## Deploy stack
+1. `docker-compose up -d`
 
-
-## Copy configs to make
-1. ``
-1. ``
-1. ``
-1. ``
-1. ``
 
 ## References
 * [How to get the current time in Python](https://stackoverflow.com/questions/415511/how-to-get-the-current-time-in-python)
