@@ -31,6 +31,10 @@ First, Osquery will monitor file system events for newly created files. Rsyslog 
 * [README](ElasticStackv7/README.md)
 
 
+## PoC: Monitoring user browser activity with Osquery
+* [PoC: Monitoring user browser activity with Osquery](https://holdmybeersecurity.com/2019/10/06/poc-monitoring-user-browser-activity-with-osquery/)
+* [README](osquery-url-monitor/README.md)
+
 ## Projects
 * Google Grr
 * MITRE Caldera
