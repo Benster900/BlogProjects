@@ -35,6 +35,11 @@ First, Osquery will monitor file system events for newly created files. Rsyslog 
 * [PoC: Monitoring user browser activity with Osquery](https://holdmybeersecurity.com/2019/10/06/poc-monitoring-user-browser-activity-with-osquery/)
 * [README](osquery-url-monitor/README.md)
 
+## Exfiltrating data on macOS with Folder Actions
+This blog post is going to demonstrate a proof of concept (PoC) to exfiltrate data from macOS with a built-in functionality called Folder Actions. The Folder Actions functionality triggers Applescripts to execute code when certain conditions (creating files, deleting files, etc.) occur by interactions with Finder. This functionality provides a method to exfiltrate data without the need for a shell to execute the actions. The Applescript provided below will utilize this functionality to monitor for new files in the user's Download folder and, upon detection of a new file, exfiltrate a copy of the file to a remote server.
+
+* [Exfiltrating data on macOS with Folder Actions](https://holdmybeersecurity.com/exfiltrating-data-on-macos-with-folder-actions)
+
 ## Projects
 * Google Grr
 * MITRE Caldera
