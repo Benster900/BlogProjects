@@ -53,7 +53,7 @@ services:
       - kafka
       - rsyslog
     cpus: 2
-    mem_limit: 300M
+    mem_limit: 500M
     
   ############################################ Zookeeper ############################################
   zookeeper:
@@ -138,7 +138,7 @@ services:
     depends_on:
       - ksql-server
     cpus: 1
-    mem_limit: 100M
+    mem_limit: 500M
 
 networks: 
   kafka-backend:

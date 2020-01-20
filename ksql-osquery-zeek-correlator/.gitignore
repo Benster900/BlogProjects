@@ -1,1 +1,2 @@
 group_vars/windows.yml
+group_vars/infra.yml

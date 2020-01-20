@@ -23,7 +23,7 @@ COPY conf/rsyslog/rsyslog-server/11-zeek-to-kafka.conf /etc/rsyslog.d/11-zeek-to
 COPY conf/rsyslog/rsyslog-server/30-osquery-to-splunk.conf /etc/rsyslog.d/30-osquery-to-splunk.conf
 
 # Osquery configs
-COPY conf/rsyslog/rsyslog-server/10-osquery-to-kafka.conf /etc/rsyslog.d/10-osquery-to-kafka.conf
+#COPY conf/rsyslog/rsyslog-server/10-osquery-to-kafka.conf /etc/rsyslog.d/10-osquery-to-kafka.conf
 COPY conf/rsyslog/rsyslog-server/31-zeek-to-splunk.conf /etc/rsyslog.d/31-zeek-to-splunk.conf
 
 # Expose port
