@@ -16,3 +16,4 @@
 * [Ansible - win_copy](https://docs.ansible.com/ansible/2.4/win_copy_module.html)
 * [Ansible - win_shell](https://docs.ansible.com/ansible/latest/modules/win_shell_module.html)
 * [Logstash - Replace double backslashes // with one / in a string](https://discuss.elastic.co/t/replace-double-backslashes-with-one-in-a-string/165858/4)
+* [Github - dennybritz/docker-splunk](https://github.com/dennybritz/docker-splunk/blob/master/enterprise/README.md)
