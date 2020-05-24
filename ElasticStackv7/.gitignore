@@ -1,2 +1,3 @@
-Docker/nginx/certs
-Docker/logstash/certs
+conf/ssl/*.key
+conf/ssl/*.crt
+conf/ssl/dhparam.pem

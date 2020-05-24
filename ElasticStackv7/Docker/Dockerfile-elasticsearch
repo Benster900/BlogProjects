@@ -1,2 +1,3 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch:7.0.0
-COPY Docker/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml
+ARG ELASTICSEARCH_VERSION
+FROM docker.elastic.co/elasticsearch/elasticsearch:${ELASTICSEARCH_VERSION}
+COPY conf/elasticsearch/elasticsearch.yml /usr/share/elasticsearch/config/elasticsearch.yml

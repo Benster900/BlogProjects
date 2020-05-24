@@ -1,70 +1,74 @@
-version: '2.2'
-services:
+version: "2.2"
+services: 
+  ############################################# NGINX #############################################
   nginx:
     build:
       context: .
-      dockerfile: Docker/Dockerfile-nginx
-    container_name: elastic-nginx
+      dockerfile: docker/Dockerfile-NGINX
+      args: 
+        NGINX_VERSION: ${NGINX_VERSION}
+    container_name: 'elk-nginx'
     restart: unless-stopped
+    ports:
+      - 8000:80
+      - 8443:443
     networks: 
       - default
-      - elastic-backend
-    ports:
-      - 80:80
-      - 443:443
-    depends_on:
-      - kibana
-    cpus: 1
-    mem_limit: 50M
+      - es-backend
+    cpus: 2
+    mem_limit: 150M
 
-  kibana:
-    build:
-      context: .
-      dockerfile: Docker/Dockerfile-kibana
-    container_name: elastic-kibana
-    restart: unless-stopped
-    networks: 
-      - elastic-backend
-    depends_on:
-      - elasticsearch
-    cpus: 2 
-    mem_limit: 300M
-
+  ############################################# Logstash #############################################
   logstash:
     build:
       context: .
-      dockerfile: Docker/Dockerfile-logstash
-    container_name: elastic-logstash
+      dockerfile: docker/Dockerfile-logstash
+      args: 
+        LOGSTASH_VERSION: ${ELASTIC_VERSRION}
+    container_name: 'elk-logstash'
     restart: unless-stopped
+    ports:
+      - 5044:5044
     networks: 
       - default
-      - elastic-backend
-    ports:
-      - 5044
-    depends_on:
-      - elasticsearch
+      - es-backend
     cpus: 2
     mem_limit: 1G
 
+  ############################################# Elasticsearch #############################################
   elasticsearch:
     build:
       context: .
-      dockerfile: Docker/Dockerfile-elasticsearch
-    container_name: elastic-elasticsearch
+      dockerfile: docker/Dockerfile-elasticsearch
+      args: 
+        ELASTICSEARCH_VERSION: ${ELASTIC_VERSRION}
+    container_name: 'elk-elasticsearch'
     restart: unless-stopped
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     volumes:
-      - esdata:/usr/share/elasticsearch/data
+      - es-data:/usr/share/elasticsearch/data
     networks: 
-      - elastic-backend
+      - es-backend
     cpus: 2
-    mem_limit: 2G
+    mem_limit: 1G
+    
+  ############################################# Kibana #############################################
+  kibana:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-kibana
+      args: 
+        KIBANA_VERSION: ${ELASTIC_VERSRION}
+    container_name: 'elk-kibana'
+    restart: unless-stopped
+    networks: 
+      - es-backend
+    cpus: 2
+    mem_limit: 1G
+
+volumes: 
+  es-data:
 
 networks: 
-  elastic-backend:
-    driver: overlay
-
-volumes:
-  esdata:
-    driver: local
+  es-backend:

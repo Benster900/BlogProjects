@@ -1,13 +1,13 @@
-FROM docker.elastic.co/logstash/logstash:7.0.0
-
-# Install RELP plugin
-RUN /usr/share/logstash/bin/logstash-plugin install logstash-input-relp
+ARG LOGSTASH_VERSION
+FROM logstash:${LOGSTASH_VERSION}
 
 # Copy certs
-RUN mkdir /usr/share/logstash/ssl
-COPY Docker/logstash/certs/logstash.crt /usr/share/logstash/ssl/logstash.crt
-COPY Docker/logstash/certs/logstash.key /usr/share/logstash/ssl/logstash.key
+COPY conf/ssl/docker.crt /usr/share/logstash/ssl/logstash.crt
+COPY conf/ssl/docker.key /usr/share/logstash/ssl/logstash.key
+
+# Copy logstash.yml
+RUN rm -rf /usr/share/logstash/pipeline/logstash.conf
+COPY conf/logstash/logstash.yml /usr/share/logstash/config/logstash.yml
 
 # Copy pipeline configs
-COPY Docker/logstash/pipeline/ /usr/share/logstash/pipeline
-RUN rm -rf /usr/share/logstash/pipeline/logstash.conf
+COPY conf/logstash/pipeline/ /usr/share/logstash/pipeline

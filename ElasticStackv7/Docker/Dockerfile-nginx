@@ -1,10 +1,12 @@
-FROM nginx:1.16-alpine 
+ARG NGINX_VERSION
+FROM nginx:${NGINX_VERSION}
 
-# Copy config
-COPY Docker/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY Docker/nginx/kibana.conf /etc/nginx/conf.d/kibana.conf
-
-# Copy cert stuff
+# Copy SSL
 RUN mkdir /etc/nginx/ssl
-COPY Docker/nginx/certs/nginx.crt  /etc/nginx/ssl/nginx.crt
-COPY Docker/nginx/certs/nginx.key /etc/nginx/ssl/nginx.key
+COPY conf/ssl/docker.key /etc/nginx/ssl/nginx.key
+COPY conf/ssl/docker.crt /etc/nginx/ssl/nginx.crt
+COPY conf/ssl/dhparam.pem /etc/nginx/ssl/dhparam.pem
+
+# Copy configs
+COPY conf/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx/kibana.conf /etc/nginx/conf.d/kibana.conf
