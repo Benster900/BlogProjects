@@ -18,17 +18,17 @@
 # visit the documentation for the complete details of each option.
 # https://go.es.io/WinlogbeatConfig
 winlogbeat.event_logs:
-  - name: Application
-    ignore_older: 72h
+  #- name: Application
+  #  ignore_older: 72h
 
-  - name: System
+  #- name: System
 
-  - name: Security
-    processors:
-      - script:
-          lang: javascript
-          id: security
-          file: ${path.home}/module/security/config/winlogbeat-security.js
+  #- name: Security
+  #  processors:
+  #    - script:
+  #        lang: javascript
+  #        id: security
+  #        file: ${path.home}/module/security/config/winlogbeat-security.js
 
   - name: Microsoft-Windows-Sysmon/Operational
     processors:
@@ -36,11 +36,13 @@ winlogbeat.event_logs:
           lang: javascript
           id: sysmon
           file: ${path.home}/module/sysmon/config/winlogbeat-sysmon.js
+      - add_tags:
+          tags: ["sysmon"]
 
 #==================== Elasticsearch template settings ==========================
 
-setup.template.settings:
-  index.number_of_shards: 1
+#setup.template.settings:
+  #index.number_of_shards: 1
   #index.codec: best_compression
   #_source.enabled: false
 
@@ -77,7 +79,7 @@ setup.template.settings:
 
 # Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
 # This requires a Kibana endpoint configuration.
-setup.kibana:
+#setup.kibana:
 
   # Kibana Host
   # Scheme and port can be left out and will be set to the default (http and 5601)
@@ -121,9 +123,15 @@ setup.kibana:
   #password: "changeme"
 
 #----------------------------- Logstash output --------------------------------
-#output.logstash:
+output.logstash:
   # The Logstash hosts
   hosts: ["logstash_ip_addr:logstash_port"]
+
+  # Enable SSL
+  ssl.enabled: true
+
+  # Disable verification due to self-signed cert
+  ssl.verification_mode: none
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
@@ -141,8 +149,6 @@ setup.kibana:
 
 processors:
   - add_host_metadata: ~
-  - add_cloud_metadata: ~
-  - add_docker_metadata: ~
   - community_id:
       fields:
         source_ip: SourceIp
@@ -150,10 +156,9 @@ processors:
         destination_ip: DestinationIp
         destination_port: DestinationPort
         transport: Protocol
-        
-        iana_number: my_iana_number
-        icmp_type: my_icmp_type
-        icmp_code: my_icmp_code
+        #iana_number: my_iana_number
+        #icmp_type: my_icmp_type
+        #icmp_code: my_icmp_code
       target: network.community_id
 
 #================================ Logging =====================================

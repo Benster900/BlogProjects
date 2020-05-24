@@ -4,7 +4,7 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: docker/Dockerfile-NGINX
+      dockerfile: docker/Dockerfile-nginx
       args: 
         NGINX_VERSION: ${NGINX_VERSION}
     container_name: 'elk-nginx'
