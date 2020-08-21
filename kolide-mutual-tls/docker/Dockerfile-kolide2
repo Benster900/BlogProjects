@@ -1,0 +1,7 @@
+FROM kolide/fleet:2.6.0
+RUN mkdir /etc/kolide
+RUN mkdir /certs
+COPY conf/tls/kolide/snakeoil.crt /certs/kolide.crt
+COPY conf/tls/kolide/snakeoil.key /certs/kolide.key
+COPY conf/kolide/kolide2.yml /etc/kolide/kolide.yml
+CMD ["fleet", "serve", "--config", "/etc/kolide/kolide.yml"]
