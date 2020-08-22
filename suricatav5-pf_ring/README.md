@@ -1,12 +1,17 @@
 # Suricata v5.0.3 + pf_ring v7.6.0
+This repo contains an Ansible playbook to deploy Suricata compiled with pf_ring. This repo also contains the necessary configs for a manual/custom setup.
 
 * [Compile Suricata v5.0.3 with PF_RING v7.6.0 on Ubuntu 20.04](https://holdmybeersecurity.com/2020/08/22/compile-suricata-v5-0-3-with-pf_ring-v7-6-0-on-ubuntu-20-04)
 
 ## Ansible
-1. `vim hosts.ini` replace `172.16.125.130` with the IP address of the host you want to run the Ansible playbook on
-1. `vim group_vars/sec_tools.yml` replace `monitoring_interface: ens33` with the interface you want to monitor
+1. `vim hosts.ini`
+  1. Replace `172.16.125.130` with the IP address of the host to run this playbook on
+  1. Save and exit
+1. `vim group_vars/sec_tools.yml`
+  1. Replace `ens33` for monitoring_interface wiht the interface you want Suricata to monitor
+  1. Save and exit
 1. `ansible-playbook -i hosts.ini deploy_suricata_pf_ring.yml -u <user with admin perms> -K`
-  1. Enter password for usr
+  1. Enter password for user
 
 ## Oprating systems
 * Ubuntu Server 20.04 64-bit - Kernel version: `5.4.0-42-generic`
@@ -35,7 +40,7 @@
 * [Ansible - conditionals](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html)
 * [Ansible - Unsafe or Raw Strings](https://docs.ansible.com/ansible/latest/user_guide/playbooks_advanced_syntax.html#unsafe-or-raw-strings)
 * [Ansible - getent](https://docs.ansible.com/ansible/latest/modules/getent_module.html)
-* []()
-* []()
+* [Ansible - file](https://docs.ansible.com/ansible/latest/modules/file_module.html)
+* [Ansible -sysvint](https://docs.ansible.com/ansible/latest/modules/sysvinit_module.html)
 * []()
 * []()

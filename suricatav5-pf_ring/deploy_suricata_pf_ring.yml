@@ -4,6 +4,6 @@
   tasks:
     - include_vars: 'group_vars/sec_tools.yml'
     # Install pf_ring
-    #- import_tasks: 'roles/setup_pf_ring.yml'
+    - import_tasks: 'roles/setup_pf_ring.yml'
     # Instal Suricata
     - import_tasks: 'roles/setup_suricata.yml'

@@ -169,6 +169,7 @@
   copy:
     src: '/opt/pf_ring/package/etc/systemd/system/pf_ring.service'
     dest: '/etc/systemd/system/pf_ring.service'
+    mode: 0640
     remote_src: yes
   when: not pf_ringctl_stat.stat.exists
 

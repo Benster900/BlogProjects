@@ -1,6 +1,11 @@
 ##################################################################################
 # Download Suricata and install deps
 ##################################################################################
+- name: Check if pf_ring module is loaded
+  modprobe:
+    name: 'pf_ring'
+    state: present
+
 - name: Install deps
   apt:
     name: ['libpcre3','libpcre3-dbg','libpcre3-dev','build-essential','libpcap-dev','libnet1-dev','libyaml-0-2','libyaml-dev','pkg-config','zlib1g','zlib1g-dev','libcap-ng-dev','libcap-ng0','make','libmagic-dev','libjansson-dev','libnss3-dev','libgeoip-dev','liblua5.1-dev','libhiredis-dev','libevent-dev','python-yaml','rustc','cargo','liblz4-dev']
@@ -11,7 +16,7 @@
     path: '{{ suricata_dir }}'
   register: suricata_dir_stat
 
-- name: Download pf_ring
+- name: Download Suricata
   get_url:
     url: '{{ suricata_tar_url }}'
     dest: /tmp/suricata-{{ suricata_version }}.tar.gz
@@ -85,7 +90,7 @@
     group: root
   when: suricata_conf_dir_stat.stat.exists
 
-https://docs.ansible.com/ansible/latest/user_guide/playbooks_advanced_syntax.html
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_advanced_syntax.html
 - name: Copy suricata.yaml
   template:
     src: 'conf/suricata/suricata.yaml.j2'
