@@ -1,7 +1,9 @@
 ############################################## Suricata ##############################################
-suricata_dir: '/opt/suricata'
+suricata_dir: '/tmp/suricata'
 suricata_version: '5.0.3'
 suricata_tar_url: 'https://www.openinfosecfoundation.org/download/suricata-{{ suricata_version }}.tar.gz'
+
+suricata_username: 'suricata'
 
 suricata_configure_prefix: '/usr'
 suricata_configure_sysconfdir: '/etc'
@@ -13,10 +15,6 @@ suricata_configure: 'LIBS="-lrt" ./configure --prefix={{ suricata_configure_pref
 suricata_rules_dir: '/etc/suricata/rules'
 
 ############################################## PF_RING ##############################################
-pfring_ndpi_dir: ''
-pfring_ndpi_version: '3.2'
-pfring_ndpi_tar_url: 'https://github.com/ntop/nDPI/archive/{{ pfring_ndpi_version }}.tar.gz' 
-
 pfring_dir: '/opt/pf_ring'
 pfring_version: '7.6.0'
 pfring_tar_url: 'https://github.com/ntop/PF_RING/archive/{{ pfring_version }}.tar.gz'
