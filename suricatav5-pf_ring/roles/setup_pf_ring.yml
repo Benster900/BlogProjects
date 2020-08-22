@@ -1,0 +1,25 @@
+##############################################
+# Install deps
+##############################################
+- name: Install dependencies 
+  apt:
+    name: ['linux-headers-{{ ansible_kernel }}','wget','cmake','make','gcc','g++','flex','git','bison','libpcap-dev','libssl-dev','python3-dev','swig','zlib1g-dev','libgeoip-dev','build-essential','libelf-dev','pkg-config']
+    state: latest
+
+##############################################
+# Download pf_ring
+##############################################
+- name: Stat pf_ring directory
+
+- name: Craete pf_ring directory
+
+- name: Download pf_ring v{{ pf_ring_version }}
+  url_get:
+    url:
+
+- name: Unarchive pf_ring
+
+##############################################
+# Compile and install pf_ring
+##############################################
+- name:
