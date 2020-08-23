@@ -1,7 +1,7 @@
 --host_identifier=hostname
 
 --tls_hostname=kolide.hackinglab.local:8443
---tls_server_certs=conf/tls/root_ca/root_CA.crt
+--tls_server_certs=conf/tls/client/server_cert_chain.crt
 --tls_client_cert=conf/tls/client/device01_devices_hackinglab_local.crt
 --tls_client_key=conf/tls/client/device01_devices_hackinglab_local.key
 
