@@ -5,7 +5,7 @@
 --tls_client_cert=device_tls_cert_file_path
 --tls_client_key=device_tls_key_file_path
 
---enroll_secret_path=/etc/osquery/osquery.key
+--enroll_secret_path=/etc/osquery/enroll.key
 --enroll_tls_endpoint=/api/v1/osquery/enroll
 
 --config_plugin=tls
