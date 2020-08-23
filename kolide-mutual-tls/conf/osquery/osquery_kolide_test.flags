@@ -1,11 +1,11 @@
 --host_identifier=hostname
 
---tls_hostname=kolide_tls_hostname
---tls_server_certs=kolide_tls_cert_file_path
---tls_client_cert=device_tls_cert_file_path
---tls_client_key=device_tls_key_file_path
+--tls_hostname=kolide.hackinglab.local:8443
+--tls_server_certs=conf/tls/root_ca/root_CA.crt
+--tls_client_cert=conf/tls/client/device01_devices_hackinglab_local.crt
+--tls_client_key=conf/tls/client/device01_devices_hackinglab_local.key
 
---enroll_secret_path=/etc/osquery/osquery.key
+--enroll_secret_path=conf/osquery/kolide_enrollment_key.txt
 --enroll_tls_endpoint=/api/v1/osquery/enroll
 
 --config_plugin=tls

@@ -4,7 +4,7 @@ services:
   nginx:
     build: 
       context: .
-      dockerfile: docker/Dockerfile-nginx2
+      dockerfile: docker/Dockerfile-nginx
     container_name: kolide-nginx
     restart: unless-stopped
     ports: 
