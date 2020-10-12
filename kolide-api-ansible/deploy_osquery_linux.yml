@@ -1,0 +1,12 @@
+- hosts: 'osquery_linux'
+  #become: yes
+  #become_user: root
+  tasks:
+    # Request variables for playbook
+    - import_tasks: 'roles/osquery/init.yml'
+      delegate_to: localhost 
+
+    # Install/Setup Osquery on linux
+    - import_tasks: 'roles/osquery/linux/setup_osquery.yml'
+      become: yes
+      become_user: root
