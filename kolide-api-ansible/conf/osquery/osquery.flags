@@ -2,11 +2,11 @@
 --tls_server_certs=/etc/osquery/kolide.crt
 --enroll_secret_path=/etc/osquery/osquery.key
 {% else %}
---tls_server_certs=C:\Program Files\osquery\certs\certificate.crt
+--tls_server_certs=C:\Program Files\osquery\certs\kolide.crt
 --enroll_secret_path=C:\Program Files\osquery\osquery.key
 --database_path=C:\Program Files\osquery\osquery.db
 {% endif %}
---tls_hostname={{ kolide_hostname }}.{{ base_domain }}:8443
+--tls_hostname={{ kolide_hostname }}:8443
 --host_identifier=uuid
 --enroll_tls_endpoint=/api/v1/osquery/enroll
 --config_plugin=tls

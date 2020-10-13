@@ -3,7 +3,7 @@
 #########################################################
 - name:  Get Kolide public certificate
   community.crypto.get_certificate:
-    host: "{{ kolide_hostname }}.{{ base_domain }}"
+    host: "{{ kolide_hostname }}"
     port: "{{ kolide_port }}"
   run_once: true
   register: cert
@@ -16,7 +16,7 @@
 #########################################################
 - name: Get Osquery enrollment secret from Kolide
   uri:
-    url: "https://{{ kolide_hostname }}.{{ base_domain }}:{{ kolide_port }}/api/v1/kolide/spec/enroll_secret"
+    url: "https://{{ kolide_hostname }}:{{ kolide_port }}/api/v1/kolide/spec/enroll_secret"
     method: GET
     return_content: yes
     validate_certs: no

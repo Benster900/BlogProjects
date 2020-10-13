@@ -1,0 +1,10 @@
+####################################### General #######################################
+base_domain: 'hackinglab.local'
+
+####################################### Osquery #######################################
+osquery_gpg_key: '1484120AC4E9F8A1A577AEEE97A80C63C9D8B80B'
+osquery_repo_url: 'deb [arch=amd64] https://pkg.osquery.io/deb deb main'
+
+####################################### Kolide #######################################
+kolide_hostname: 'kolide'
+kolide_port: 8443

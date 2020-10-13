@@ -1,6 +1,4 @@
 - hosts: 'osquery_linux'
-  #become: yes
-  #become_user: root
   tasks:
     # Request variables for playbook
     - import_tasks: 'roles/osquery/init.yml'
