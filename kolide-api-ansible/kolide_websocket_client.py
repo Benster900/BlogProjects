@@ -4,16 +4,16 @@
 # The purpose of this script is to demonstrate how to use the Kolide API and WebSockets
 # portion of the API with Python.
 ##########################################################################################
+from websocket import create_connection
 from os import path, environ
 from pathlib import Path
-from websocket import create_connection
-import ssl
 import requests
+import argparse
 import urllib3
+import getpass
 import json
 import yaml
-import getpass
-import argparse
+import ssl
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def generateJSONAuthHeader(kolide_token):
@@ -46,8 +46,8 @@ def generateKoldieQueryCampaignIDJSONpayload(koldie_query_campaign_id):
 
 def getKolideLiveQueryResults(base_url, kolide_token, koldie_query_campaign_id) -> list():
   """
-  Input:
-  Output: Return results from query
+  Input: Kolide base URL, Kolide JWT, query ID
+  Output: Return results from websocket for query ID
   """
   # Generate Kolide URL
   kolide_websocket_uri = f"wss://{':'.join( base_url.split(':')[1:])[2:]}/api/v1/kolide/results/websocket"
@@ -191,8 +191,6 @@ if __name__ == "__main__":
     print (hosts)
     print (labels)
 
-    #query = "SELECT * FROM osquery_info"
-    #hosts = ["ubuntuvm","DESKTOP-6U9KU52"]
     koldie_query_campaign_id = createKolideLiveQuery(base_url, kolide_token, user_query, hosts)
     print (f"Kolide query campaign ID: {koldie_query_campaign_id}")
 
