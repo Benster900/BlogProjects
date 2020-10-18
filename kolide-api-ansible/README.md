@@ -3,16 +3,21 @@
 ## Python Kolide client
 1. `virtualenv -p python3 venv`
 1. `source venv/bin/activate`
-`. 
+1. `pip3 install -r requirements.txt`
+
+### Get results of query
+1. `python3 kolide_websocket_client.py --campaign_id <X>`
+
+### Create a query and wait for results
+1. `python3 kolide_websocket_client.py`
 
 ## Supported versions and OSes
+* `Kolide version 3.1.0`
 * `Osquery version 4.5.1`
 * `Ubuntu 20.04 64-bit`
 * `Ansible v2.11+`
 
-
 ## References
-
 ### Kolide/Osquery
 * [Downloading & Installing Osquery](https://osquery.io/downloads/official/4.5.1)
 * [CptOfEvilMinions/osquerey-file-carve-server/conf/osquery/osquery-NO_MUTUAL_TLS.flags](https://github.com/CptOfEvilMinions/osquerey-file-carve-server/blob/master/conf/osquery/osquery-NO_MUTUAL_TLS.flags)
