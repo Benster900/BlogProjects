@@ -1,0 +1,13 @@
+[passwords/credential%3A%3Ahybridanalysis%3A]
+version = 8.0.7
+modtime = 1608615908.997972000
+
+[app/install/is_configured]
+version = 8.0.7
+modtime = 1608615909.019127000
+
+[]
+access = read : [ * ], write : [ admin ]
+export = system
+version = 8.0.7
+modtime = 1608615965.432393000
