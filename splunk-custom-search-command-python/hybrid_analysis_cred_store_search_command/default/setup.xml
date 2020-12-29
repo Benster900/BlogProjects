@@ -1,7 +1,7 @@
 <setup>
-  <block title="Gently Used Credential" endpoint="storage/passwords" entity="hybridanalysis*" mode="iter" eai_strict="false">
+  <block title="Enter Hybrid Analysis API key" endpoint="storage/passwords" entity="hybridanalysis*" mode="iter" eai_strict="false">
     <input field="password">
-      <label>Password for tedward</label>
+      <label>Hybrid Analysis API key</label>
       <type>password</type>
     </input>
   </block>

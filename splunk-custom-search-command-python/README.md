@@ -1,16 +1,16 @@
-# 
+# Custom Python search command for Splun
 
 ## Local dev
-1. `virtualenv -p python3 venv`
-1. `source venv/bin/activate`
-1. `pip3 install -r requirements.txt`
-1. `export PYTHONPATH=~/splunk-sdk-python`
-1. `pip3 install --target=custom_search_command/lib splunklib`
-1. `pip3 install --target=custom_search_command/lib splunk-sdk`
+1. `pip3 install -r requirements.txt --target=helloworld/lib`
+1. `pip3 install -r requirements.txt --target=hybrid_analysis_cred_store_search_command/lib`
+1. `pip3 install -r community_id_pip_search_command/requirements.txt --target=community_id_pip_search_command/lib`
 
 ## DEBUG custom search command from command line
 1. `cd /opt/splunk/etc/apps/custom_search_command`
-1. `/opt/splunk/bin/splunk cmd python /opt/splunk/etc/apps/custom_search_command/bin/<python file name>.py`
+1. `/opt/splunk/bin/splunk cmd python /opt/splunk/etc/apps/<app_name>/bin/<python file name>.py`
+
+## Helloworld search command
+1. `index="zeek" sourcetype="bro:conn:json" | helloworld | table uid, src_ip, dest_ip, hello`
 
 ## CommunityID search command
 1. `index="zeek" | communityid( dest_ip=dest_ip, dest_port=dest_port, protocol=proto, src_ip=src_ip, src_port=src_port ) | table src_ip, src_port, dest_ip, dest_port, proto, community_id`
@@ -47,6 +47,3 @@
 * [HybridAnalysis - 94ff3cb078b5f679596c8b52acca06ff6ab84f6b](https://www.hybrid-analysis.com/search?query=94ff3cb078b5f679596c8b52acca06ff6ab84f6b)
 * [How do I allow users to edit credentials using the setup screen?](https://community.splunk.com/t5/Getting-Data-In/How-do-I-allow-users-to-edit-credentials-using-the-setup-screen/m-p/90447)
 * [splunk/TA-VirusTotal - setup.xml](https://gitlab.com/adarma_public_projects/splunk/TA-VirusTotal/-/raw/master/default/setup.xml)
-* []()
-* []()
-* []()

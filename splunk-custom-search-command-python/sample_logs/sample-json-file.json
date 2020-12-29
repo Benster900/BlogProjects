@@ -1,6 +1,6 @@
 {
 "Name": "Test",
-"Mobile": 12345678,
+"Mobile": "",
 "Boolean": true,
 "Pets": ["Dog", "cat"],
 "Address": {

@@ -17,7 +17,7 @@ services:
     volumes: 
       - splunk-var:/opt/splunk/var
       - splunk-etc:/opt/splunk/etc
-      - ./simple_search_command:/opt/splunk/etc/apps/simple_search_command
+      - ./hello_world:/opt/splunk/etc/apps/hello_world
       - ./hybrid_analysis_cred_store_search_command:/opt/splunk/etc/apps/hybrid_analysis_cred_store_search_command
       - ./community_id_pip_search_command:/opt/splunk/etc/apps/community_id_pip_search_command
     cpus: 2
