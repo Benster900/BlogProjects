@@ -194,17 +194,17 @@ output.logstash:
   ssl.enabled: true
 
   # Disable verification due to self-signed cert
-  ssl.verification_mode: none
+  ssl.verification_mode: full
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
-  #ssl.certificate_authorities: ["{{ server_logging_crt_file_path }}"]
+  ssl.certificate_authorities: ["{{ server_logging_crt_file_path }}"]
 
   # Certificate for SSL client authentication
-  #ssl.certificate: "{{ filebeat_client_logging_crt_file_path }}"
+  ssl.certificate: "{{ filebeat_client_logging_crt_file_path }}"
 
   # Client Certificate Key
-  #ssl.key: "{{ filebeat_client_logging_key_file_path }}"
+  ssl.key: "{{ filebeat_client_logging_key_file_path }}"
 
 # ================================= Processors =================================
 processors:
