@@ -1,0 +1,66 @@
+version: "2.2"
+services:
+  ############################################ Boundary controller ############################################
+  boundary-controller:
+    container_name: 'boundary-controller'
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-boundary-controller
+      build_args:
+        - 
+    networks:
+      - default
+      - boundary-backend
+    ports:
+      - 9200:9200
+    cpus: 1
+    mem_limit: 300M
+
+  ############################################ Boundary worker01 ############################################
+  boundary-worker01:
+    container_name: 'boundary-worker01'
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-boundary-worker
+      build_args:
+        - 
+    networks:
+      - boundary-backend
+    cpus: 1
+    mem_limit: 300M
+
+  ############################################ Boudnary worker 02 ############################################
+  boundary-worker02:
+    container_name: 'boundary-worker02'
+    restart: unless-stopped
+    build_args:
+        - 
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-boundary-worker
+    networks:
+      - boundary-backend
+    cpus: 1
+    mem_limit: 300M
+
+  ############################################ Boundary worker 03 ############################################
+  boundary-worker03:
+    container_name: 'boundary-worker03'
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: docker/Dockerfile-boundary-worker
+    networks:
+      - boundary-backend
+    cpus: 1
+    mem_limit: 300M
+
+networks:
+  boundary-backend:
+
+configs:
+
+secrets:
+  vault-kms-

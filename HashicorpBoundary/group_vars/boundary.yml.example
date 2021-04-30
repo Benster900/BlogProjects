@@ -1,0 +1,25 @@
+###################################################### Boundary ######################################################
+hostname: 'boundary'
+
+boundary_user: 'boundary'
+boundary_group: 'boundary'
+
+disable_mlock: false
+tls_disable: false
+
+boundary_version: '0.2.0'
+boundry_dl_url: 'https://releases.hashicorp.com/boundary/{{ boundary_version }}/boundary_{{ boundary_version }}_linux_amd64.zip'
+
+#### Postgres ####
+postgres_dbname: 'boundary'
+postgres_username: 'boundary'
+postgres_password: 'Changeme123!'
+
+#### Vault ####
+vault_addr: 'https://vault.hackinglab.local:443'
+
+vault_kms_mount_path: 'transit/'
+
+vault_kms_root_token: ''
+vault_kms_worker_token: ''
+vault_kms_recovery_token: ''
