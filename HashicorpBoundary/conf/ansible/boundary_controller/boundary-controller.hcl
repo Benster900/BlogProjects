@@ -23,8 +23,8 @@ listener "tcp" {
   purpose = "api"
 
   tls_disable = {{ tls_disable }}
-  tls_cert_file = "{{ }}"
-  tls_key_file  = "{{ }}"
+  tls_cert_file = "/etc/boundary/ssl/controller01_boundary_{{ base_domain | replace('.','-') }}.crt"
+  tls_key_file  = "/etc/boundary/ssl/controller01_boundary_{{ base_domain | replace('.','-') }}.key"
 
   # Uncomment to enable CORS for the Admin UI. Be sure to set the allowed origin(s)
   # to appropriate values.
@@ -40,9 +40,9 @@ listener "tcp" {
   purpose = "cluster"
 
   tls_disable = {{ tls_disable }}
-  tls_cert_file = "{{ }}"
-  tls_key_file  = "{{ }}"
-  tls_client_ca_file = "{{ }}"
+  tls_cert_file = "/etc/boundary/ssl/controller01_boundary_{{ base_domain | replace('.','-') }}.crt"
+  tls_key_file  = "/etc/boundary/ssl/controller01_boundary_{{ base_domain | replace('.','-') }}.key"
+  tls_client_ca_file = "/etc/boundary/ssl/boundary_{{ base_domain | replace('.','-') }}_pki_int.crt"
 }
 
 
@@ -61,8 +61,8 @@ kms "transit" {
   namespace          = "keys/"
 
   // TLS Configuration
-  tls_ca_cert        = "{{ }}"
-  tls_server_name    = "{{ }}"
+  tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
+  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
   tls_skip_verify    = "false"
 }
 
@@ -78,8 +78,8 @@ kms "transit" {
   namespace          = "keys/"
 
   // TLS Configuration
-  tls_ca_cert        = "{{ }}"
-  tls_server_name    = "{{ }}"
+  tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
+  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
   tls_skip_verify    = "false"
 }
 
@@ -95,7 +95,7 @@ kms "transit" {
   namespace          = "keys/"
 
   // TLS Configuration
-  tls_ca_cert        = "{{ }}"
-  tls_server_name    = "{{ }}"
+  tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
+  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
   tls_skip_verify    = "false"
 }

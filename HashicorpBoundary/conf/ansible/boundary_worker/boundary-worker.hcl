@@ -38,7 +38,7 @@ kms "transit" {
   namespace          = "keys/"
 
   // TLS Configuration
-  tls_ca_cert        = "{{ }}"
-  tls_server_name    = "{{ }}"
+  tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
+  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
   tls_skip_verify    = "false"
 }
