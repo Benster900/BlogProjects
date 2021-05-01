@@ -19,7 +19,7 @@ worker {
 listener "tcp" {
   purpose = "proxy"
   tls_disable = true
-  address = "127.0.0.1"
+  address = "0.0.0.0"
 }
 
 ##################################################################################################
@@ -33,7 +33,7 @@ kms "transit" {
   disable_renewal    = "false"
 
   // Key configuration
-  key_name           = "boundary-worker-token"
+  key_name           = "boundary-worker-key"
   mount_path         = "{{ vault_kms_mount_path }}"
   namespace          = "keys/"
 
