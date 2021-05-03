@@ -1,9 +1,0 @@
-- name: Create Boundary pki int mount path
-
-- name: Generate a Boundary PKI int certificate signing request
-
-- name: Sign the certificate signing request with root CA
-
-- name: Upload the certificate
-
-- name: Create Boundary pki int role

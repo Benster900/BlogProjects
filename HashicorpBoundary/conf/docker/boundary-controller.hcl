@@ -5,10 +5,10 @@ disable_mlock = {{ disable_mlock }}
 # Boudnary controller
 ##################################################################################################
 controller {
-  name = "{{ base_domain | replace('.','-') }}-controller"
+  name = "{{ base_domain }}-{{ hostname }}-controller"
   description = "{{ base_domain }} Boundary controller"
   database {
-    url = "postgresql://{{ postgres_username }}:{{ postgres_password }}@127.0.0.1:5432/{{ postgres_dbname }}"
+    url = "postgresql://{{ postgres_username }}:{{ postgres_password }}@postgres:5432/{{ postgres_dbname }}?sslmode=disable"
   }
 }
 
@@ -23,8 +23,8 @@ listener "tcp" {
   purpose = "api"
 
   tls_disable = {{ tls_disable }}
-  tls_cert_file = "/etc/boundary/ssl/controller01-boundary-{{ base_domain | replace('.','-') }}.crt"
-  tls_key_file  = "/etc/boundary/ssl/controller01-boundary-{{ base_domain | replace('.','-') }}.key"
+  tls_cert_file = "/boundary/ssl/controller01_boundary.crt"
+  tls_key_file  = "/boundary/ssl/controller01_boundary.key"
 
   # Uncomment to enable CORS for the Admin UI. Be sure to set the allowed origin(s)
   # to appropriate values.
@@ -35,14 +35,14 @@ listener "tcp" {
 # Data-plane listener configuration block (used for worker coordination)
 listener "tcp" {
   # Should be the IP of the NIC that the worker will connect on
-  address = "127.0.0.1"
+  address = "172.16.238.10"
   # The purpose of this listener
   purpose = "cluster"
 
   tls_disable = {{ tls_disable }}
-  tls_cert_file = "/etc/boundary/ssl/controller01-boundary-{{ base_domain | replace('.','-') }}.crt"
-  tls_key_file  = "/etc/boundary/ssl/controller01-boundary-{{ base_domain | replace('.','-') }}.key"
-  tls_client_ca_file = "/etc/boundary/ssl/boundary-{{ base_domain | replace('.','-') }}-pki-int.crt"
+  tls_cert_file = "/boundary/ssl/controller01_boundary.crt"
+  tls_key_file  = "/boundary/ssl/controller01_boundary.key"
+  tls_client_ca_file = "/boundary/ssl/boundary_pki_int.crt"
 }
 
 
@@ -62,7 +62,7 @@ kms "transit" {
 
   // TLS Configuration
   tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
-  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
+  tls_server_name    = "vault.{{ base_domain }}"
   tls_skip_verify    = "false"
 }
 
@@ -79,7 +79,7 @@ kms "transit" {
 
   // TLS Configuration
   tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
-  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
+  tls_server_name    = "vault.{{ base_domain }}"
   tls_skip_verify    = "false"
 }
 
@@ -96,6 +96,6 @@ kms "transit" {
 
   // TLS Configuration
   tls_ca_cert        = "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
-  tls_server_name    = "{{ vault_addr.rpartition('//')[-1].partition('/')[0].partition(':')[0] }}"
+  tls_server_name    = "vault.{{ base_domain }}"
   tls_skip_verify    = "false"
 }
