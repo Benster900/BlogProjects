@@ -1,75 +1,75 @@
-# ##############################################################
-# # Install Boundary
-# ##############################################################
-# - name: Add Boundary GPG key
-#   ansible.builtin.apt_key:
-#     url: '{{ boundary_gpg_key }}'
-#     state: present
+##############################################################
+# Install Boundary
+##############################################################
+- name: Add Boundary GPG key
+  ansible.builtin.apt_key:
+    url: '{{ boundary_gpg_key }}'
+    state: present
 
-# - name: Add Boundary repo
-#   ansible.builtin.apt_repository:
-#     repo: '{{ boundary_repo }}'
-#     state: present
+- name: Add Boundary repo
+  ansible.builtin.apt_repository:
+    repo: '{{ boundary_repo }}'
+    state: present
 
-# - name: Install Boundary {{ boundary_version }}
-#   apt:
-#     name: ['boundary={{ boundary_version }}']
-#     state: present
+- name: Install Boundary {{ boundary_version }}
+  apt:
+    name: ['boundary={{ boundary_version }}']
+    state: present
 
-# - name: Allow Boundary binary to enable memlock
-#   community.general.capabilities:
-#     path: /usr/bin/boundary
-#     capability: cap_ipc_lock=+ep
-#     state: present
+- name: Allow Boundary binary to enable memlock
+  community.general.capabilities:
+    path: /usr/bin/boundary
+    capability: cap_ipc_lock=+ep
+    state: present
 
-# - name: Create Boundary group
-#   ansible.builtin.group:
-#     name: '{{ boundary_group }}'
-#     state: present
+- name: Create Boundary group
+  ansible.builtin.group:
+    name: '{{ boundary_group }}'
+    state: present
 
-# - name: Create Boundary user
-#   user: 
-#     name: '{{ boundary_user }}'
-#     group: '{{ boundary_group }}' 
-#     system: yes 
+- name: Create Boundary user
+  user: 
+    name: '{{ boundary_user }}'
+    group: '{{ boundary_group }}' 
+    system: yes 
 
-# - name: Create Boundary directory
-#   file:
-#     path: '{{ item }}'
-#     state: directory
-#     owner: '{{ boundary_user }}'
-#     group: '{{ boundary_group }}'
-#   with_items:
-#     - '/etc/boundary'
-#     - '/etc/boundary/ssl'
+- name: Create Boundary directory
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: '{{ boundary_user }}'
+    group: '{{ boundary_group }}'
+  with_items:
+    - '/etc/boundary'
+    - '/etc/boundary/ssl'
 
-# - name: Copy Boundary controller service config 
-#   template:
-#     src: 'conf/ansible/boundary_controller/boundary-controller.service'
-#     dest: '/etc/systemd/system/boundary-controller.service'
-#     owner: 'root'
-#     group: 'root'
-#     mode: 0644
+- name: Copy Boundary controller service config 
+  template:
+    src: 'conf/ansible/boundary_controller/boundary-controller.service'
+    dest: '/etc/systemd/system/boundary-controller.service'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
   
-# - name: Copy Boundary worker service config 
-#   template:
-#     src: 'conf/ansible/boundary_worker/boundary-worker.service'
-#     dest: '/etc/systemd/system/boundary-worker.service'
-#     owner: 'root'
-#     group: 'root'
-#     mode: 0644
+- name: Copy Boundary worker service config 
+  template:
+    src: 'conf/ansible/boundary_worker/boundary-worker.service'
+    dest: '/etc/systemd/system/boundary-worker.service'
+    owner: 'root'
+    group: 'root'
+    mode: 0644
 
-# ##############################################################
-# # Setup Boundary
-# ##############################################################
-# - name: CURL Vault Root CA
-#   get_url:
-#     url: '{{ vault_addr }}/v1/pki/ca/pem'
-#     validate_certs: no
-#     dest: "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
-#     owner: 'root'
-#     group: 'root'
-#     mode: '0444'
+##############################################################
+# Setup Boundary
+##############################################################
+- name: CURL Vault Root CA
+  get_url:
+    url: '{{ vault_addr }}/v1/pki/ca/pem'
+    validate_certs: no
+    dest: "/etc/ssl/certs/{{ base_domain | replace('.','-') }}-root-ca.crt"
+    owner: 'root'
+    group: 'root'
+    mode: '0444'
 
 - name: Copy Boundary intermediate certificate
   copy:

@@ -4,5 +4,6 @@
   tasks:
     - include_vars: 'group_vars/boundary.yml'
     #- import_tasks: 'roles/init.yml'
-    #- import_tasks: 'roles/boundary_controller/setup_postgres.yml' # Install/Setup Postgres
-    - import_tasks: 'roles/boundary/setup_boundary.yml'             # Install/Setup Boundary
+    - import_tasks: 'roles/boundary/setup_postgres.yml'  # Install/Setup Postgres
+    - import_tasks: 'roles/boundary/setup_boundary.yml'  # Install/Setup Boundary
+    - import_tasks: 'roles/boundary/setup_ufw.yml'       # Setup firewall

@@ -1,24 +1,24 @@
-# ##############################################################
-# # Install PostgreSQL
-# ##############################################################
-# - name: Add Postgres GPG key
-#   ansible.builtin.apt_key:
-#     url: '{{ postgres_gpg_key_url }}'
-#     state: present
+##############################################################
+# Install PostgreSQL
+##############################################################
+- name: Add Postgres GPG key
+  ansible.builtin.apt_key:
+    url: '{{ postgres_gpg_key_url }}'
+    state: present
 
-# - name: Add Postgres repo
-#   ansible.builtin.apt_repository:
-#     repo: '{{ postgres_repo }}'
-#     state: present
+- name: Add Postgres repo
+  ansible.builtin.apt_repository:
+    repo: '{{ postgres_repo }}'
+    state: present
 
-# - name: Install Postgres 13
-#   apt:
-#     name: ['postgresql-13', 'postgresql-contrib', 'python3-pip', 'libpq-dev', 'acl']
-#     state: present
+- name: Install Postgres 13
+  apt:
+    name: ['postgresql-13', 'postgresql-contrib', 'python3-pip', 'libpq-dev', 'acl']
+    state: present
 
-# - name: Install Python package - psycopg2
-#   pip:
-#     name: 'psycopg2'
+- name: Install Python package - psycopg2
+  pip:
+    name: 'psycopg2'
 
 ######################################################
 # Setup Postgres database for Boundary
@@ -49,8 +49,16 @@
   become_method: sudo
   become_user: postgres
 
-# - name: Enable and restart Postgres
-#   service:
-#     name: 'postgresql'
-#     enabled: yes
-#     state: restarted
+- name: Enable pgcrypto extension
+  postgresql_ext:
+    name: pgcrypto
+    db: '{{ postgres_dbname }}'
+  become: yes
+  become_method: sudo
+  become_user: postgres
+
+- name: Enable and restart Postgres
+  service:
+    name: 'postgresql'
+    enabled: yes
+    state: restarted

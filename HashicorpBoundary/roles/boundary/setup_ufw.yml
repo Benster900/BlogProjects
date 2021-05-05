@@ -1,0 +1,21 @@
+- name: Allow OpenSSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow Boundary API access
+  ufw:
+    rule: allow
+    port: '9200'
+    proto: tcp
+
+- name: Allow Boundary worker access
+  ufw:
+    rule: allow
+    port: '9202'
+    proto: tcp
+
+- name: Allow everything and enable UFW
+  ufw:
+    state: enabled
+    policy: allow

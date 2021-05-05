@@ -21,8 +21,8 @@
 * [community.postgresql.postgresql_privs](https://docs.ansible.com/ansible/latest/collections/community/postgresql/postgresql_privs_module.html#ansible-collections-community-postgresql-postgresql-privs-module)
 * [Replace multiple values with jinja2](https://stackoverflow.com/questions/36355482/replace-multiple-values-with-jinja2)
 * [Best way to display only URL domain using jinja2](https://stackoverflow.com/questions/27696337/best-way-to-display-only-url-domain-using-jinja2)
-* []()
-* []()
+* [postgresql_ext - Add or remove PostgreSQL extensions from a database](https://docs.ansible.com/ansible/2.6/modules/postgresql_ext_module.html)
+* [ufw – Manage firewall with UFW](https://docs.ansible.com/ansible/2.7/modules/ufw_module.html)
 * []()
 
 ### Docker
@@ -50,10 +50,12 @@
 * [INSTALL/SETUP VAULT FOR PKI + NGINX + DOCKER – BECOMING YOUR OWN CA](https://holdmybeersecurity.com/2020/07/09/install-setup-vault-for-pki-nginx-docker-becoming-your-own-ca/)
 * [Encryption as a Service: Transit Secrets Engine](https://learn.hashicorp.com/tutorials/vault/eaas-transit)
 * [Understanding the Boundary Identity and Access Management Model](https://www.hashicorp.com/blog/understanding-the-boundary-identity-and-access-management-model)
+* [Configure Boundary using Terraform](https://learn.hashicorp.com/tutorials/boundary/getting-started-config)
+* [Installing Boundary Without Generated Resources](https://www.boundaryproject.io/docs/installing/no-gen-resources#create-roles-to-manage-scopes)
+* [Permissions in Boundary](https://www.boundaryproject.io/docs/concepts/security/permissions)
 * []()
 * []()
 * []()
-
 
 ### Postgres
 * [PostgreSQL DROP DATABASE](https://www.postgresqltutorial.com/postgresql-drop-database/)
@@ -62,6 +64,6 @@
 * [PostgreSQL Show Tables](https://www.postgresqltutorial.com/postgresql-show-tables/)
 * [Connecting to Postgresql in a docker container from outside](https://stackoverflow.com/questions/37694987/connecting-to-postgresql-in-a-docker-container-from-outside)
 * [Dockerhub - Postgres](https://hub.docker.com/_/postgres?tab=description&page=1&ordering=last_updated&name=13.)
-* []()
+* [How to install pgcrypto module on a postgres DB](https://stackoverflow.com/questions/52630876/how-to-install-pgcrypto-module-on-a-postgres-db/52637460)
 * []()
 * []()
