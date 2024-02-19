@@ -1,0 +1,15 @@
+####################################################################
+#  Install/Setup Redis
+####################################################################
+- name: Install/Setup Redis
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - redis-server
+
+- name: Start redis service
+  service:
+    name: redis-server.service
+    state: restarted
+    enabled: true

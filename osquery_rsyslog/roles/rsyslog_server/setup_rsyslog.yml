@@ -1,0 +1,68 @@
+####################################################################
+# Install/Setup Rsyslog
+####################################################################
+- name: Install Rsyslog
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - rsyslog
+    - rsyslog-relp
+
+- name: Copy Rsyslog.conf
+  template:
+    src: 'conf/rsyslog_server/rsyslog.conf'
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Copy rsyslog configs
+  template:
+    src: '{{ item }}'
+    dest: '/etc/rsyslog.d/{{ item | basename }}'
+    owner: root
+    group: root
+    mode: 0400
+  with_items:
+    - 'conf/rsyslog_server/50-default.conf'
+    - 'conf/rsyslog_server/60-osquery-to-disk.conf'
+
+- name: Create directory
+  file:
+    path: '/var/log/rsyslog'
+    state: directory
+    owner: syslog
+    group: adm
+
+- name: Start Rsyslog client
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: true
+
+####################################################################
+# Setup Logrotate
+####################################################################
+- name: Modify logrotate rsyslog config
+  ansible.builtin.lineinfile:
+    path: /etc/logrotate.d/rsyslog
+    regexp: '^/var/log/syslog'
+    line: '/var/log/rsyslog'
+
+####################################################################
+# Setup UFW
+####################################################################
+- name: Enable UFW
+  ufw:
+    state: enabled
+
+- name: Allow SSH to Rsyslog
+  ufw:
+    rule: allow
+    port: 22
+
+- name: Allow all access to Rsyslog
+  ufw:
+    rule: allow
+    port: '{{ rsyslog_port }}'

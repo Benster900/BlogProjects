@@ -1,0 +1,7 @@
+[linux:children]
+linux_webserver
+
+[linux_webserver]
+172.16.17.141
+
+[linux_ftp]

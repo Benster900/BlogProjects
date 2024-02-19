@@ -1,0 +1,8 @@
+[windows:children]
+win_laptop
+
+
+[win_laptop]
+172.16.17.145
+
+[win_dc]

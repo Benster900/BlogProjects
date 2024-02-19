@@ -1,0 +1,6 @@
+conf/tls/kolide/*
+conf/tls/root_ca/*
+conf/tls/client/*
+*.crt
+*.csr
+fb-test-server/venv

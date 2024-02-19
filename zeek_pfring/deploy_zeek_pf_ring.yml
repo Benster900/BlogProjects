@@ -1,0 +1,7 @@
+- hosts: 'zeek'
+  become: true
+  become_user: root
+  tasks:
+    - import_tasks: 'roles/zeek/init.yml'
+    - import_tasks: 'roles/zeek/setup_pf_ring.yml'
+    - import_tasks: 'roles/zeek/setup_zeek.yml'

@@ -1,0 +1,27 @@
+################################################################
+# Install/Setup Mongo
+################################################################
+- name: Add MongoDB key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: '{{ mongo_key }}'
+
+- name: Add MongoDB Repo
+  apt_repository:
+    repo: '{{ mongo_repo_url }}'
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: true
+
+- name: Install MongoDB
+  apt:
+    name: 'mongodb-org'
+    state: latest
+
+- name: Start MongoDB service
+  service:
+    name: 'mongod'
+    state: restarted
+    enabled: true

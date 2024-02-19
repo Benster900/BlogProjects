@@ -1,3 +1,0 @@
-- hosts: manager
-  tasks:
-    - import_tasks: roles/setup_manager.yml

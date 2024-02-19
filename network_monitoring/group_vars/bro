@@ -1,0 +1,3 @@
+bro_hostname: bro
+bro_path: /usr/local/bro
+bro_mon_int: ens192

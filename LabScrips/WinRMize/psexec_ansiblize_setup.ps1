@@ -31,11 +31,11 @@ $sb = {
       $computer = "",
       $username = "",
       $password = "",
-      $command = "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command `"iex ((new-object net.webclient).DownloadString('https://github.com/ansible/ansible/raw/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))"
+      $command = "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command `"iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/ansible/ansible/devel/examples/scripts/ConfigureRemotingForAnsible.ps1'))"
   )
 
   if (( Test-Connection -Cn $computer -BufferSize 16 -Count 1 -ea 0 -TimeToLive 3 -quiet )) {
-    M:\PsExec "\\$computer" -u $username -p $password -d cmd /c $Command
+    M:\PsExec "\\$computer" /accepteula -u $username -p $password -d cmd /c $Command
   }
 }
 

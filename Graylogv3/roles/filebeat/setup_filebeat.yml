@@ -1,0 +1,67 @@
+################################################################
+# Install/Setup Filebeat
+################################################################
+- name: Install things
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - 'apt-transport-https'
+
+- name: Add Filebeat key
+  apt_key:
+    url: '{{ filebeat_key }}'
+    state: present
+
+- name: Add Filebeat Repo
+  apt_repository:
+    repo: '{{ fileatbeat_repo_url }}'
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: true
+
+- name: Install filebeat
+  apt:
+    name: 'filebeat'
+    state: latest
+
+- name: Make backup of filebeat.yml
+  copy:
+    src: '/etc/filebeat/filebeat.yml'
+    dest: '/etc/filebeat/filebeat.yml.bak'
+    owner: root
+    group: root
+    mode: 0400
+    remote_src: true
+
+- name: Copy filebeat.yml
+  template:
+    src: 'conf/filebeat/filebeat.yml'
+    dest: '/etc/filebeat/filebeat.yml'
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Create Filebeat config directory
+  file:
+    path: '/etc/filebeat/conf.d'
+    state: directory
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Copy filebeat.yml bro
+  template:
+    src: 'conf/filebeat/bro.yml'
+    dest: '/etc/filebeat/conf.d/bro.yml'
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Start Filebeat service
+  service:
+    name: 'filebeat'
+    state: restarted
+    enabled: true

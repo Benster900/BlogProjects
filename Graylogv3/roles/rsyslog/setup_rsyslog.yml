@@ -1,0 +1,53 @@
+####################################################################
+# Install Rsyslog
+####################################################################
+- name: Add '{{ rsyslog_ppa }}'
+  apt_repository:
+    repo: '{{ rsyslog_ppa }}'
+    state: present
+
+- name: Run the equivalent of "apt-get update" as a separate step
+  apt:
+    update_cache: true
+
+- name: Install Rsyslog
+  package:
+    name: '{{ item }}'
+    state: latest
+  with_items:
+    - rsyslog
+    - rsyslog-mmjsonparse
+
+- name: Backup of Rsyslog.conf
+  copy:
+    src: '/etc/rsyslog.conf'
+    dest: '/etc/rsyslog.conf.bak'
+    owner: root
+    group: root
+    mode: 0400
+    remote_src: true
+
+- name: Copy Rsyslog.conf
+  template:
+    src: 'conf/rsyslog/rsyslog.conf'
+    dest: '/etc/rsyslog.conf'
+    owner: root
+    group: root
+    mode: 0400
+
+####################################################################
+# Setup Rsyslog
+####################################################################
+- name: Copy 30-nginx.conf
+  template:
+    src: 'conf/rsyslog/30-nginx.conf'
+    dest: '/etc/rsyslog.d/30-nginx.conf'
+    owner: root
+    group: root
+    mode: 0400
+
+- name: Start Rsyslog client
+  service:
+    name: rsyslog
+    state: restarted
+    enabled: true

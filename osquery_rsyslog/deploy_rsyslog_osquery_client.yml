@@ -1,0 +1,7 @@
+- hosts: 'rsyslog-client'
+  become: true
+  become_user: root
+  tasks:
+    - include_vars: 'group_vars/logging.yml'
+    - import_tasks: 'roles/osquery/setup_osquery.yml'
+    - import_tasks: 'roles/rsyslog_client/setup_rsyslog.yml'
